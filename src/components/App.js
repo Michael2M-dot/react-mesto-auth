@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
 import Header from "./Header.js";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -219,56 +220,68 @@ const App = () => {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <div className="page__container">
-          <Header mix={"page__header section"} />
-          <Main
-            onEditProfile={handleEditProfileClick}
-            onEditAvatar={handleEditAvatarClick}
-            onAddPlace={handleAddPlaceClick}
-            onCardClick={handleCardClick}
-            cards={cards}
-            onLikeClick={handleCardLike}
-            onDeleteClick={handlePopupWithForm}
+      <BrowserRouter>
+        <div className="page">
+          <div className="page__container">
+            <Header mix={"page__header section"} />
+            <Switch>
+              <Main
+                  onEditProfile={handleEditProfileClick}
+                  onEditAvatar={handleEditAvatarClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onCardClick={handleCardClick}
+                  cards={cards}
+                  onLikeClick={handleCardLike}
+                  onDeleteClick={handlePopupWithForm}
+              />
+
+              <Route path="/sign-up">
+                < Register />
+              </Route>
+              <Route path="/sign-in">
+                <Login />
+              </Route>
+            </Switch>
+
+            <Footer mix={"page__footer"} />
+          </div>
+
+          <EditProfilePopup
+              isOpen={isEditProfilePopupOpen}
+              onClose={handleClickClosePopup}
+              onUpdateUser={handleUserUpdate}
+              isSubmitted={isSubmitted}
           />
-          <Footer mix={"page__footer"} />
+
+          <EditAvatarPopup
+              isOpen={isEditAvatarPopupOpen}
+              onClose={handleClickClosePopup}
+              onUpdateAvatar={handleAvatarUpdate}
+              isSubmitted={isSubmitted}
+          />
+
+          <AddPlacePopup
+              isOpen={isAddPlacePopupOpen}
+              onClose={handleClickClosePopup}
+              onAddPlace={handleAddCardSubmit}
+              isSubmitted={isSubmitted}
+          />
+
+          <ImagePopup
+              isOpen={isImagePopupOpen}
+              data={selectedCard}
+              onClose={handleClickClosePopup}
+          />
+
+          <PopupWithSubmit
+              isOpen={isPopupWithSubmitOpen}
+              onClose={handleClickClosePopup}
+              isSubmitted={isSubmitted}
+              deleteCard={handleCardDelete}
+              data={deletedCardData}
+          />
         </div>
-
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={handleClickClosePopup}
-          onUpdateUser={handleUserUpdate}
-          isSubmitted={isSubmitted}
-        />
-
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={handleClickClosePopup}
-          onUpdateAvatar={handleAvatarUpdate}
-          isSubmitted={isSubmitted}
-        />
-
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={handleClickClosePopup}
-          onAddPlace={handleAddCardSubmit}
-          isSubmitted={isSubmitted}
-        />
-
-        <ImagePopup
-          isOpen={isImagePopupOpen}
-          data={selectedCard}
-          onClose={handleClickClosePopup}
-        />
-
-        <PopupWithSubmit
-          isOpen={isPopupWithSubmitOpen}
-          onClose={handleClickClosePopup}
-          isSubmitted={isSubmitted}
-          deleteCard={handleCardDelete}
-          data={deletedCardData}
-        />
-      </div>
+      </BrowserRouter>
     </CurrentUserContext.Provider>
   );
 };
