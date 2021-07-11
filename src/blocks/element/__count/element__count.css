@@ -1,0 +1,9 @@
+.element__count {
+  margin: 3px auto 0;
+
+  text-align: center;
+
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 16px;
+}

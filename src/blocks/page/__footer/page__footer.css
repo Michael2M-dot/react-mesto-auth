@@ -1,0 +1,11 @@
+.page__footer {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .page__footer {
+    margin-right: 19px;
+    margin-left: 19px;
+  }
+}

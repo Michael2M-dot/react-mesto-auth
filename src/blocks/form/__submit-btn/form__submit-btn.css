@@ -1,0 +1,28 @@
+.form__submit-btn {
+  /*padding: 15px 132px;*/
+  width: 100%;
+  /*min-width: 358px;*/
+  min-height: 50px;
+
+  color: var(--color__main-text_profile);
+  border-radius: 2px;
+  background-color: var(--color__background);
+
+  font-size: 18px;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.form__submit-btn:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 767px) {
+  .form__submit-btn {
+    padding: 15px 82px;
+
+    font-size: 14px;
+  }
+}

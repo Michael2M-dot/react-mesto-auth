@@ -1,0 +1,11 @@
+.element__like-and-count {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-width: 22px;
+  min-height: 35px;
+  margin: 0;
+  padding: 0;
+}
