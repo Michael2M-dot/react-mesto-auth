@@ -259,7 +259,7 @@ const App = () => {
               </Route>
             </Switch>
 
-            <Footer mix={"page__footer"} />
+            {/*<Footer mix={"page__footer"} />*/}
           </div>
 
           <EditProfilePopup

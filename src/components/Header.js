@@ -1,6 +1,7 @@
 import Logo from "../images/mesto_logo.svg";
 import cx from "classnames";
 import React from "react";
+// import { NavLink } from 'react-router-dom';
 
 function Header({ mix }, props) {
   return (
@@ -11,7 +12,7 @@ function Header({ mix }, props) {
               </a>
               <ul className="header__menu">
                   {props.userEmail && <li className="header__item">{props.userEmail}</li>}
-                  <li className="header__item">{props.buttonText}</li>
+                  <li className="header__item" onClick={}>{props.buttonText}</li>
               </ul>
 
           </header>

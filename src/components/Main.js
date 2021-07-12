@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const Main = ({
   onAddPlace,
@@ -61,6 +62,7 @@ const Main = ({
           ))}
         </ul>
       </section>
+      <Footer mix={"page__footer"} />
     </main>
   );
 };
