@@ -222,6 +222,15 @@ const App = () => {
     }
   };
 
+  //обработчик для входа пользователя в систему
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setCurrentUser({
+      loggedIn: true
+    })
+  }
+
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <BrowserRouter>
@@ -255,7 +264,7 @@ const App = () => {
                 < Register />
               </Route>
               <Route path="/sign-in">
-                <Login />
+                <Login handleLogin={handleLogin}/>
               </Route>
             </Switch>
 

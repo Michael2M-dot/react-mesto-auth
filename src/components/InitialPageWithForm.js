@@ -1,4 +1,5 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 const InitialPageWithForm = ({
 name,
@@ -7,6 +8,7 @@ onSubmit,
 children,
 button,
 idSubmitted,
+userSignUp
 }) => {
 	return(
 		<section className="page__login section">
@@ -41,6 +43,9 @@ idSubmitted,
 							</div>
 						</div>
 					</button>
+
+					{userSignUp &&
+					<NavLink className="popup__subtitle" to="/signIn">{userSignUp}</NavLink>}
 				</form>
 
 			</div>

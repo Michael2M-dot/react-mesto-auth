@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, Redirect, withRouter } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { withRouter } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Header from "./Header";
 import InitialPageWithForm from "./InitialPageWithForm";
 import Input from "./Input";
+import * as auth from '../auth';
 
 
 const Login = ({ isSubmitted }) => {
 	const currentUser = useContext(CurrentUserContext);
-	const { currentUserData, setCurrentUserData } = useState(currentUser)
 	const { signInUserData, setSignInUserData } = useState({});
 
 	const handleChange = (e) => {
@@ -21,18 +21,31 @@ const Login = ({ isSubmitted }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if(!signInUserData.username || !signInUserData.password) {
+		if(!signInUserData.email || !signInUserData.password) {
 			return;
 		}
+		auth.authorize(signInUserData.email, signInUserData.password)
+			.then((data) => {
+				if(data.jwt){
+					setSignInUserData({
+						email:'',
+						password: ''
+					}, () => {
+						currentUser.handleLogin();
+						currentUser.history.push('/')
+					})
+				}
+			})
+			.catch((err) => console.log(`Ошибка при проверке токена: ${err.status}`))
 	}
 
 	return(
 		<>
 			<Header mix={"page__header section"}
-			        buttonText="Регистрация"
+			        buttonText={"Регистрация"}
 			/>
 			<InitialPageWithForm
-				name={"user-login"}
+				name={"user-sign-in"}
 				title={"Войти"}
 				button={!isSubmitted ? "Войти" : "Выполняется вход"}
 				onSubmit={handleSubmit}
@@ -40,7 +53,7 @@ const Login = ({ isSubmitted }) => {
 			>
 				<Input
 					type="url"
-					value={userEmail || ""}
+					value={signInUserData.email || ""}
 					id="user-email"
 					placeholder="Email"
 					name="userNameInput"
@@ -51,7 +64,7 @@ const Login = ({ isSubmitted }) => {
 				/>
 				<Input
 					type="password"
-					value={password || ""}
+					value={signInUserData.password || ""}
 					id="user-password"
 					placeholder="Пароль"
 					name="userPasswordInput"

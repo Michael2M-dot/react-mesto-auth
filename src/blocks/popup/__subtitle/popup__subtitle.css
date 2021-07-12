@@ -1,0 +1,16 @@
+.popup__subtitle{
+    width: 100%;
+
+    margin: 15px auto 0;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+    .popup__subtitle {
+        margin-top: 20px;
+    }
+}
