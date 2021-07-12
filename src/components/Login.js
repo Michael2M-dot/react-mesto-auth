@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import Header from "./Header";
 
 
 const Login = () => {
@@ -19,14 +20,16 @@ const Login = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if(!signInUserData.username || !signInUserData.password) {
-			return
+			return;
 		}
 
 
 	}
 
 	return(
-
+		<>
+			<Header mix={"page__header section"} />
+		</>
 	)
 }
 

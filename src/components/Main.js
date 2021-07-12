@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import Header from "./Header";
 
 const Main = ({
   onAddPlace,
@@ -15,6 +16,10 @@ const Main = ({
 
   return (
     <main className="content page__content section section_size_narrow">
+      <Header mix={"page__header section"}
+              userEmail={currentUser.email}
+              buttonText="Выйти"
+      />
       <section className="profile">
         <div className="profile__user">
           <div

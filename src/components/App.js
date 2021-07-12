@@ -227,7 +227,7 @@ const App = () => {
       <BrowserRouter>
         <div className="page">
           <div className="page__container">
-            <Header mix={"page__header section"} />
+            {/*<Header mix={"page__header section"} />*/}
             <Switch>
               <ProtectedRoute
                   path="/"
