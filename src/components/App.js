@@ -10,6 +10,10 @@ import ImagePopup from "./ImagePopup";
 import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithSubmit from "./PopupWithSubmit";
+import Login from "./Login";
+import Register from "./Register";
+import ProtectedRoute from "./ProtectedRoute";
+
 
 const App = () => {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -225,7 +229,8 @@ const App = () => {
           <div className="page__container">
             <Header mix={"page__header section"} />
             <Switch>
-              <Main
+              <ProtectedRoute
+                  path="/"
                   onEditProfile={handleEditProfileClick}
                   onEditAvatar={handleEditAvatarClick}
                   onAddPlace={handleAddPlaceClick}
@@ -233,7 +238,18 @@ const App = () => {
                   cards={cards}
                   onLikeClick={handleCardLike}
                   onDeleteClick={handlePopupWithForm}
-              />
+                  component={Main}
+                  />
+
+              {/*<Main*/}
+              {/*    onEditProfile={handleEditProfileClick}*/}
+              {/*    onEditAvatar={handleEditAvatarClick}*/}
+              {/*    onAddPlace={handleAddPlaceClick}*/}
+              {/*    onCardClick={handleCardClick}*/}
+              {/*    cards={cards}*/}
+              {/*    onLikeClick={handleCardLike}*/}
+              {/*    onDeleteClick={handlePopupWithForm}*/}
+              {/*/>*/}
 
               <Route path="/sign-up">
                 < Register />
