@@ -53,6 +53,7 @@
 @import url(./blocks/popup/__window/_size/popup__window_size_l.css);
 @import url(./blocks/popup/__window/_size/popup__window_size_xs.css);
 @import url(./blocks/popup/__title/popup__title.css);
+@import url(./blocks/popup/__footer/popup__footer.css);
 @import url(./blocks/popup/__subtitle/popup__subtitle.css);
 @import url(./blocks/popup/__title/_pos/popup__title_pos_centered.css);
 @import url(./blocks/popup/__button-close/popup__button-close.css);
@@ -67,6 +68,7 @@
 @import url(./blocks/form/__input-error/_active/form__input-error_active.css);
 @import url(./blocks/form/__submit-btn/form__submit-btn.css);
 @import url(./blocks/form/__submit-btn/_disabled/form__submit-btn_disabled.css);
+@import url(./blocks/form/__login-submit-btn/form__login-submit-btn.css);
 @import url(./blocks/jump/jump.css);
 @import url(./blocks/button/__jumping-dots/button__jumping-dots.css);
 @import url(./blocks/button/__jumping-dots/_visability/button__jumping-dots_visibility_hidden.css);

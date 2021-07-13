@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import Header from "./Header";
 import InitialPageWithForm from "./InitialPageWithForm";
 import Input from "./Input";
+import * as auth from '../auth';
 
 const Register = ({ isSubmitted }) => {
 	const { signUpUserData, setSignUpUserData } = useState();
@@ -20,6 +21,14 @@ const Register = ({ isSubmitted }) => {
 		if(!signUpUserData.email || !signUpUserData.password) {
 			return;
 		}
+		auth.register(signUpUserData.email, signUpUserData.password)
+			.then((res) => {
+				if(res){
+					setSignUpUserData({}, () => {
+
+					});
+				}
+			})
 
 	}
 
@@ -27,17 +36,18 @@ const Register = ({ isSubmitted }) => {
 		<>
 			<Header mix={"page__header section"}
 			        buttonText={"Войти"}
+			        endPoint={"/sign-in"}
 			/>
 			<InitialPageWithForm
 				name={"user-sign-up"}
 				title={"Регистрация"}
 				button={!isSubmitted ? "Зарегистрироваться" : "Регистрация нового пользователя"}
 				onSubmit={handleSubmit}
-				userSignUp={'Уже зарегистрированы? Войти'}
+				userSignUp={"Войти"}
 			>
 				<Input
 					type="url"
-					value={signUpUserData.email || ""}
+					value={signUpUserData || ""}
 					id="user-email"
 					placeholder="Email"
 					name="userNameInput"
@@ -48,7 +58,7 @@ const Register = ({ isSubmitted }) => {
 				/>
 				<Input
 					type="password"
-					value={signUpUserData.password || ""}
+					value={signUpUserData || ""}
 					id="user-password"
 					placeholder="Пароль"
 					name="userPasswordInput"

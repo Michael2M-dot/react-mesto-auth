@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
-import { withRouter } from "react-router-dom";
+import {withRouter, Route, NavLink} from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Header from "./Header";
 import InitialPageWithForm from "./InitialPageWithForm";
 import Input from "./Input";
 import * as auth from '../auth';
+import cx from "classnames";
+import Logo from "../images/mesto_logo.svg";
 
 
 const Login = ({ isSubmitted }) => {
@@ -39,21 +41,22 @@ const Login = ({ isSubmitted }) => {
 			.catch((err) => console.log(`Ошибка при проверке токена: ${err.status}`))
 	}
 
-	return(
+	return (
 		<>
 			<Header mix={"page__header section"}
 			        buttonText={"Регистрация"}
+			        endPoint={"/sign-up"}
 			/>
+
 			<InitialPageWithForm
 				name={"user-sign-in"}
 				title={"Войти"}
 				button={!isSubmitted ? "Войти" : "Выполняется вход"}
 				onSubmit={handleSubmit}
-
 			>
 				<Input
 					type="url"
-					value={signInUserData.email || ""}
+					value={signInUserData || ""}
 					id="user-email"
 					placeholder="Email"
 					name="userNameInput"
@@ -64,7 +67,7 @@ const Login = ({ isSubmitted }) => {
 				/>
 				<Input
 					type="password"
-					value={signInUserData.password || ""}
+					value={signInUserData|| ""}
 					id="user-password"
 					placeholder="Пароль"
 					name="userPasswordInput"
@@ -80,4 +83,4 @@ const Login = ({ isSubmitted }) => {
 }
 
 
-export default withRouter(Login);
+export default Login;

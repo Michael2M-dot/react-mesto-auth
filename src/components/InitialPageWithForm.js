@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const InitialPageWithForm = ({
 name,
@@ -25,7 +25,7 @@ userSignUp
 					<button
 						arial-lable="Подтвердите действие пользователя"
 						type="submit"
-						className={`button form__submit-btn ${
+						className={`button form__submit-btn form__login-submit-btn ${
 							idSubmitted ? "form__submit-btn_disabled" : ""
 						}`}
 						disabled={idSubmitted}
@@ -45,9 +45,11 @@ userSignUp
 					</button>
 
 					{userSignUp &&
-					<NavLink className="popup__subtitle" to="/signIn">{userSignUp}</NavLink>}
+						<div className="popup__footer">
+							<p className="popup__subtitle">Уже зарегистрированы?</p>
+							<Link className="popup__subtitle" to="/signIn">{userSignUp}</Link>
+						</div>}
 				</form>
-
 			</div>
 		</section>
 	)

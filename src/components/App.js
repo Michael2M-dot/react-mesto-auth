@@ -232,82 +232,69 @@ const App = () => {
 
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
       <BrowserRouter>
-        <div className="page">
-          <div className="page__container">
-            {/*<Header mix={"page__header section"} />*/}
-            <Switch>
-              <ProtectedRoute
-                  path="/"
-                  onEditProfile={handleEditProfileClick}
-                  onEditAvatar={handleEditAvatarClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onCardClick={handleCardClick}
-                  cards={cards}
-                  onLikeClick={handleCardLike}
-                  onDeleteClick={handlePopupWithForm}
-                  component={Main}
-                  />
+        <CurrentUserContext.Provider value={currentUser}>
+          <div className="page">
+            <div className="page__container">
+              <Switch>
+                <ProtectedRoute
+                    path="/main"
+                    onEditProfile={handleEditProfileClick}
+                    onEditAvatar={handleEditAvatarClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onCardClick={handleCardClick}
+                    cards={cards}
+                    onLikeClick={handleCardLike}
+                    onDeleteClick={handlePopupWithForm}
+                    component={Main}
+                />
+                <Route path="/sign-in">
+                  <Login handleLogin={handleLogin}/>
+                </Route>
+                <Route path="/sign-up">
+                  < Register />
+                </Route>
+              </Switch>
+            </div>
 
-              {/*<Main*/}
-              {/*    onEditProfile={handleEditProfileClick}*/}
-              {/*    onEditAvatar={handleEditAvatarClick}*/}
-              {/*    onAddPlace={handleAddPlaceClick}*/}
-              {/*    onCardClick={handleCardClick}*/}
-              {/*    cards={cards}*/}
-              {/*    onLikeClick={handleCardLike}*/}
-              {/*    onDeleteClick={handlePopupWithForm}*/}
-              {/*/>*/}
+            <EditProfilePopup
+                isOpen={isEditProfilePopupOpen}
+                onClose={handleClickClosePopup}
+                onUpdateUser={handleUserUpdate}
+                isSubmitted={isSubmitted}
+            />
 
-              <Route path="/sign-up">
-                < Register />
-              </Route>
-              <Route path="/sign-in">
-                <Login handleLogin={handleLogin}/>
-              </Route>
-            </Switch>
+            <EditAvatarPopup
+                isOpen={isEditAvatarPopupOpen}
+                onClose={handleClickClosePopup}
+                onUpdateAvatar={handleAvatarUpdate}
+                isSubmitted={isSubmitted}
+            />
 
-            {/*<Footer mix={"page__footer"} />*/}
+            <AddPlacePopup
+                isOpen={isAddPlacePopupOpen}
+                onClose={handleClickClosePopup}
+                onAddPlace={handleAddCardSubmit}
+                isSubmitted={isSubmitted}
+            />
+
+            <ImagePopup
+                isOpen={isImagePopupOpen}
+                data={selectedCard}
+                onClose={handleClickClosePopup}
+            />
+
+            <PopupWithSubmit
+                isOpen={isPopupWithSubmitOpen}
+                onClose={handleClickClosePopup}
+                isSubmitted={isSubmitted}
+                deleteCard={handleCardDelete}
+                data={deletedCardData}
+            />
           </div>
-
-          <EditProfilePopup
-              isOpen={isEditProfilePopupOpen}
-              onClose={handleClickClosePopup}
-              onUpdateUser={handleUserUpdate}
-              isSubmitted={isSubmitted}
-          />
-
-          <EditAvatarPopup
-              isOpen={isEditAvatarPopupOpen}
-              onClose={handleClickClosePopup}
-              onUpdateAvatar={handleAvatarUpdate}
-              isSubmitted={isSubmitted}
-          />
-
-          <AddPlacePopup
-              isOpen={isAddPlacePopupOpen}
-              onClose={handleClickClosePopup}
-              onAddPlace={handleAddCardSubmit}
-              isSubmitted={isSubmitted}
-          />
-
-          <ImagePopup
-              isOpen={isImagePopupOpen}
-              data={selectedCard}
-              onClose={handleClickClosePopup}
-          />
-
-          <PopupWithSubmit
-              isOpen={isPopupWithSubmitOpen}
-              onClose={handleClickClosePopup}
-              isSubmitted={isSubmitted}
-              deleteCard={handleCardDelete}
-              data={deletedCardData}
-          />
-        </div>
+        </CurrentUserContext.Provider>
       </BrowserRouter>
-    </CurrentUserContext.Provider>
+
   );
 };
 
