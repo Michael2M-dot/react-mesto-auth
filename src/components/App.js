@@ -23,7 +23,7 @@ const App = () => {
   const [isPopupWithSubmitOpen, setIsPopupWithSubmitOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedCard, setSelectedCard] = useState({}); //стэйт создан для хранения данных о карточке, без него после закрытия на мгновенье появляется окно с alt
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({isLoggedIn: false});
   const [cards, setCards] = useState([]);
   const [deletedCardData, setDeletedCardData] = useState({});
 
@@ -253,6 +253,10 @@ const App = () => {
                 </Route>
                 <Route path="/sign-up">
                   < Register />
+                </Route>
+                <Route path='/'>
+                  { currentUser.isLoggedIn ? <Redirect to="/main" /> :
+                  <Redirect to="/login" />}
                 </Route>
               </Switch>
             </div>

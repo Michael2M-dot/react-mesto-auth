@@ -11,13 +11,14 @@ import Logo from "../images/mesto_logo.svg";
 
 const Login = ({ isSubmitted }) => {
 	const currentUser = useContext(CurrentUserContext);
-	const { signInUserData, setSignInUserData } = useState({});
+	const { signInUserData, setSignInUserData } = useState({email:'', password:''});
+	// console.log(signInUserData.email)
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 
 		setSignInUserData({
-		[name]: value
+		[name]: [value]
 		});
 	};
 
@@ -34,7 +35,7 @@ const Login = ({ isSubmitted }) => {
 						password: ''
 					}, () => {
 						currentUser.handleLogin();
-						currentUser.history.push('/')
+						currentUser.history.push('/main')
 					})
 				}
 			})
@@ -56,10 +57,11 @@ const Login = ({ isSubmitted }) => {
 			>
 				<Input
 					type="url"
-					value={signInUserData || ""}
+					// value={signInUserData.email || ""}
 					id="user-email"
 					placeholder="Email"
 					name="userNameInput"
+					textColor={"form__login-input"}
 					required={true}
 					maxLength="30"
 					// minLength="2"
@@ -67,10 +69,11 @@ const Login = ({ isSubmitted }) => {
 				/>
 				<Input
 					type="password"
-					value={signInUserData|| ""}
+					// value={signInUserData.password || ""}
 					id="user-password"
 					placeholder="Пароль"
 					name="userPasswordInput"
+					textColor={"form__login-input"}
 					required={true}
 					// maxLength="30"
 					// minLength="2"
@@ -83,4 +86,4 @@ const Login = ({ isSubmitted }) => {
 }
 
 
-export default Login;
+export default withRouter(Login);

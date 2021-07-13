@@ -47,7 +47,7 @@ userSignUp
 					{userSignUp &&
 						<div className="popup__footer">
 							<p className="popup__subtitle">Уже зарегистрированы?</p>
-							<Link className="popup__subtitle" to="/signIn">{userSignUp}</Link>
+							<Link className="popup__subtitle" to="/sign-in">{userSignUp}</Link>
 						</div>}
 				</form>
 			</div>
