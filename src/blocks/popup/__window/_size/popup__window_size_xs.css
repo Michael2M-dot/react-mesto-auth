@@ -1,9 +1,9 @@
-.popup__window_size_xs{
-    width: 358px;
+.popup__window_size_xs {
+  width: 358px;
 }
 
 @media screen and (max-width: 767px) {
-    .popup__window_size_xs{
-        width: 260px;
-    }
+  .popup__window_size_xs {
+    width: 260px;
+  }
 }

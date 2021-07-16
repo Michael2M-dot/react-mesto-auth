@@ -1,17 +1,17 @@
-.form__login-submit-btn{
-    margin-top: 216px;
+.form__login-submit-btn {
+  margin-top: 216px;
 
-    color: var(--color__main-text_elements);
-    border-radius: 2px;
-    background-color: var(--color__background_window);
+  color: var(--color__main-text_elements);
+  border-radius: 2px;
+  background-color: var(--color__background_window);
 }
 
 .form__login-submit-btn:hover {
-    opacity: 0.85;
+  opacity: 0.85;
 }
 
 @media screen and (max-width: 767px) {
-    .form__login-submit-btn {
-        margin-top: 173px;
-    }
+  .form__login-submit-btn {
+    margin-top: 173px;
+  }
 }

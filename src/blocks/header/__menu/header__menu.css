@@ -1,10 +1,10 @@
-.header__menu{
-    max-width: 100%;
-    height: 22px;
+.header__menu {
+  max-width: 100%;
+  height: 22px;
 
-    margin: 6px 0 46px auto;
+  margin: 6px 0 46px auto;
 
-    display: flex;
+  display: flex;
 
-    list-style: none;
+  list-style: none;
 }

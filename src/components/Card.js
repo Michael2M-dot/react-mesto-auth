@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Card = ({ onCardClick, onCardLike, onCardDelete, card }) => {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   //обработчик слушателя клика полноэкранного просмотра изображения карточки
   const handleClick = () => {

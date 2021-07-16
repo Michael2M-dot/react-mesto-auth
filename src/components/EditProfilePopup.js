@@ -4,7 +4,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Input from "./Input";
 
 const EditProfilePopup = ({ isOpen, onClose, onUpdateUser, isSubmitted }) => {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
