@@ -63,7 +63,6 @@ const Login = () => {
       });
   };
 
-  console.log(isSubmitted);
   return (
     <>
       <Header
