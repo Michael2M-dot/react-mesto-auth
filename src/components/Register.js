@@ -14,6 +14,7 @@ const Register = () => {
     setIsSignUp,
     setAuthUser,
     authUser,
+    setIsShowPassword
   } = useContext(CurrentUserContext);
   const [userData, setUserData] = useState({
     email: "",
@@ -48,6 +49,7 @@ const Register = () => {
           });
           setIsInfoToolTipOpen(true);
           setIsSignUp(true);
+          setIsShowPassword(false);
           history.push("/sign-in");
           setTimeout(() => setIsSubmitted(false), 2000);
         } else {
@@ -56,8 +58,22 @@ const Register = () => {
             message: "Что-то пошло не так! Попробуйте еще раз.",
           });
           setIsSignUp(false);
+          setIsShowPassword(false);
         }
       });
+    } else {
+        setUserData({
+          ...userData,
+          password:"",
+          confirmPassword: ""
+        })
+        setAuthUser({
+          ...authUser,
+          message: "Пароли не совпадают! Попробуйте еще раз",
+        });
+        setIsSignUp(false);
+        setIsShowPassword(false);
+        setIsInfoToolTipOpen(true);
     }
   };
 

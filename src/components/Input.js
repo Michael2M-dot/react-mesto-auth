@@ -3,11 +3,11 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 const Input = (props) => {
 
+    const { setIsShowPassword, isShowPassword } = useContext(CurrentUserContext);
+    //стэйт переменная для типа поля ввода инпута
     const [inputType, setInputType] = useState(props.type)
 
-    const { setIsShowPassword, isShowPassword } = useContext(CurrentUserContext);
-
-    console.log(inputType)
+    //функционал отображения пароля в поле ввода
     const handlePasswordVisible = () => {
         if(inputType === 'password') {
             setIsShowPassword(true)
@@ -27,7 +27,7 @@ const Input = (props) => {
         id={`${props.id}-input`}
       />
         {props.type === 'password' &&
-            <a href="#"
+            <a href="/"
                onClick={handlePasswordVisible}
                className={`form__password-control ${isShowPassword ? "form__password-control_visible" : ""}`} />}
 

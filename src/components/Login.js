@@ -15,6 +15,7 @@ const Login = () => {
     authUser,
     setAuthUser,
     setIsInfoToolTipOpen,
+    setIsShowPassword
   } = useContext(CurrentUserContext);
   const [userData, setUserData] = useState({ email: "", password: "" });
 
@@ -46,6 +47,7 @@ const Login = () => {
             password: "",
           });
           setIsLoggedIn(true);
+          setIsShowPassword(false);
           history.push("/main");
           setTimeout(() => setIsSubmitted(false), 5000);
         } else {
@@ -56,6 +58,7 @@ const Login = () => {
           setIsLoggedIn(false);
           setIsSubmitted(false);
           setIsInfoToolTipOpen(true);
+          setIsShowPassword(false);
           setAuthUser({
             ...authUser,
             message: "Неверный логин или пароль! Попробуйте еще раз.",
@@ -65,6 +68,7 @@ const Login = () => {
       .catch((err) => {
         console.log(`Ошибка авторизации пользователя: ${err.status}`);
         setIsSubmitted(false);
+        setIsShowPassword(false);
       });
   };
 
@@ -92,9 +96,8 @@ const Login = () => {
           colormodifier={"form__login-input"}
           required={true}
           maxLength="30"
-          // minLength="2"
+          minLength="5"
           onChange={handleChange}
-          // isShowPassword={isShowPassword}
         />
         <Input
           type="password"
@@ -104,11 +107,8 @@ const Login = () => {
           name="password"
           colormodifier={"form__login-input"}
           required={true}
-          // maxLength="30"
-          // minLength="2"
+          minLength="6"
           onChange={handleChange}
-          // isShowPassword={isShowPassword}
-          // handlePasswordVisibleClick={handlePasswordVisible}
         />
       </InitialPageWithForm>
     </>

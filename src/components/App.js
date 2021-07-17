@@ -263,15 +263,6 @@ const App = () => {
     }
   };
 
-  // const handlePasswordVisible = (e) => {
-  //   if(e.target.type === 'password') {
-  //     setIsShowPassword(true)
-  //     e.target.setAttribute('type', 'text')
-  //   } else {
-  //     setIsShowPassword(false)
-  //     e.target.setAttribute('type', 'password')
-  //   }
-  // }
 
   return (
     <CurrentUserContext.Provider
