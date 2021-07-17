@@ -1,27 +1,14 @@
-import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import Header from "./Header";
 import InitialPageWithForm from "./InitialPageWithForm";
 import Input from "./Input";
-import * as auth from "../auth";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-const Register = () => {
-  const {
-    isSubmitted,
-    setIsSubmitted,
-    setIsInfoToolTipOpen,
-    setIsSignUp,
-    setAuthUser,
-    authUser,
-    setIsShowPassword,
-  } = useContext(CurrentUserContext);
+const Register = ({ handleRegister, isSubmitted }) => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const history = useHistory();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,47 +24,7 @@ const Register = () => {
     if (!userData.password || !userData.email) {
       return;
     }
-
-    if (userData.password === userData.confirmPassword) {
-      setIsSubmitted(true);
-
-      auth.register(userData.password, userData.email).then((res) => {
-        console.log(res);
-        if (res) {
-          setAuthUser({
-            ...authUser,
-            message: "Вы успешно зарегистрировались!",
-          });
-          setIsInfoToolTipOpen(true);
-          setIsSignUp(true);
-          setIsShowPassword(false);
-          history.push("/sign-in");
-          setTimeout(() => setIsSubmitted(false), 2000);
-        } else {
-          setAuthUser({
-            ...authUser,
-            message: "Что-то пошло не так! Попробуйте еще раз.",
-          });
-          setIsInfoToolTipOpen(true);
-          setIsSignUp(false);
-          setIsShowPassword(false);
-          setIsSubmitted(false);
-        }
-      });
-    } else {
-      setUserData({
-        ...userData,
-        password: "",
-        confirmPassword: "",
-      });
-      setAuthUser({
-        ...authUser,
-        message: "Пароли не совпадают! Попробуйте еще раз",
-      });
-      setIsSignUp(false);
-      setIsShowPassword(false);
-      setIsInfoToolTipOpen(true);
-    }
+    handleRegister(userData.email, userData.password, userData.confirmPassword);
   };
 
   return (

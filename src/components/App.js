@@ -32,7 +32,7 @@ const App = () => {
   //Стэйт переменная авторизации пользователя
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   //Стэйт переменная регистрации нового пользователя
-  const [isSignedUp, setIsSignUp] = useState(false);
+  const [isSignedUp, setIsSignedUp] = useState(false);
   //Стэйт переменная для временного хранения данных о выбраной карточке
   const [selectedCard, setSelectedCard] = useState({});
   //Стэйт переменная для карточки
@@ -44,6 +44,9 @@ const App = () => {
   //Стэйт переменная для cохранения данных авторизованного пользователя
   // const [authUser, setAuthUser] = useState({});
   const [authUserData, setAuthUserData] = useState({});
+  //стэйт переменная для хранения постового адреса пользователя
+  const [userEmail, setUserEmail] = useState({ email: "" });
+  //стэйт переменная для хранения состояния значка просмотра пароля
   const [isShowPassword, setIsShowPassword] = useState(false);
   const history = useHistory();
 
@@ -245,40 +248,80 @@ const App = () => {
     }
   };
 
-
+  //функционал авторизации пользователя
   const handleLogin = (password, email) => {
     setIsSubmitted(true);
 
     auth
-        .authorize(password, email)
-        .then((data) => {
-          if (data) {
-            setAuthUserData({
-              email: "",
-              password: "",
-            });
-            setIsLoggedIn(true);
-            setIsShowPassword(false);
-            history.push("/main");
-            setTimeout(() => setIsSubmitted(false), 3000);
-          } else {
-            setAuthUserData({
-              ...authUserData,
-              message: "Неверный логин или пароль! Попробуйте еще раз.",
-            });
-            setIsLoggedIn(false);
-            setIsSubmitted(false);
-            setIsInfoToolTipOpen(true);
-            setIsShowPassword(false);
-          }
-        })
-        .catch((err) => {
-          console.log(`Ошибка авторизации пользователя: ${err.status}`);
-          setIsSubmitted(false);
+      .authorize(password, email)
+      .then((data) => {
+        if (data) {
+          setAuthUserData({
+            email: "",
+            password: "",
+          });
+          setIsLoggedIn(true);
           setIsShowPassword(false);
-        });
-  }
+          history.push("/main");
+          setTimeout(() => setIsSubmitted(false), 3000);
+        } else {
+          setAuthUserData({
+            ...authUserData,
+            message: "Неверный логин или пароль! Попробуйте еще раз.",
+          });
+          setIsLoggedIn(false);
+          setIsSubmitted(false);
+          setIsInfoToolTipOpen(true);
+          setIsShowPassword(false);
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка авторизации пользователя: ${err.status}`);
+        setIsSubmitted(false);
+        setIsShowPassword(false);
+      });
+  };
 
+  //функционал регистрации нового пользователя
+  const handleRegister = (email, password, confirmPassword) => {
+    if (password === confirmPassword) {
+      setIsSubmitted(true);
+
+      auth.register(password, email).then((res) => {
+        if (res) {
+          setAuthUserData({
+            ...authUserData,
+            message: "Вы успешно зарегистрировались!",
+          });
+          setIsInfoToolTipOpen(true);
+          setIsSignedUp(true);
+          setIsShowPassword(false);
+          history.push("/sign-in");
+        } else {
+          setAuthUserData({
+            ...authUserData,
+            message: "Что-то пошло не так! Попробуйте еще раз.",
+          });
+          setIsInfoToolTipOpen(true);
+          setIsSignedUp(false);
+          setIsShowPassword(false);
+          setIsSubmitted(false);
+        }
+      });
+    } else {
+      setAuthUserData({
+        ...authUserData,
+        password: "",
+        confirmPassword: "",
+        message: "Пароли не совпадают! Попробуйте еще раз",
+      });
+      setIsSignedUp(false);
+      setIsShowPassword(false);
+      setIsInfoToolTipOpen(true);
+    }
+
+    setTimeout(() => setIsSubmitted(false), 2000);
+  };
 
   //функция проверки токена для автоматической авторизации пользователя
   useEffect(() => {
@@ -292,33 +335,29 @@ const App = () => {
     if (token) {
       auth.checkToken(token).then((res) => {
         const { data } = res;
-        setAuthUserData({
-          ...authUserData,
-          email: data.email
-        });
+        setUserEmail(data.email);
         setIsLoggedIn(true);
         history.push("/main");
       });
     }
   };
 
+  //функция выхода пользователя из системы
+  const signOut = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("jwt");
+    history.push("/sign-in");
+  };
+
   return (
     <CurrentUserContext.Provider
       value={{
         currentUser,
+        authUserData,
         isLoggedIn,
-        setIsLoggedIn,
-        isSubmitted,
-        setIsSubmitted,
-        // setAuthUser,
-        // authUser,
-        isSignedUp,
-        setIsSignUp,
-        isInfoToolTipOpen,
-        setIsInfoToolTipOpen,
-        isShowPassword,
         setIsShowPassword,
-        authUserData
+        isShowPassword,
+        isSignedUp,
       }}
     >
       <div className="page">
@@ -334,16 +373,18 @@ const App = () => {
               cards={cards}
               onLikeClick={handleCardLike}
               onDeleteClick={handlePopupWithForm}
+              signOut={signOut}
               to={"/sign-in"}
+              userEmail={userEmail}
             />
             <Route path="/sign-in">
-              <Login
-                  handleLogin={handleLogin}
-                  isSubmitted={isSubmitted}
-              />
+              <Login handleLogin={handleLogin} isSubmitted={isSubmitted} />
             </Route>
             <Route path="/sign-up">
-              <Register />
+              <Register
+                handleRegister={handleRegister}
+                isSubmitted={isSubmitted}
+              />
             </Route>
             <Route path="/">
               {isLoggedIn ? (
@@ -393,7 +434,7 @@ const App = () => {
         <InfoToolTip
           isOpen={isInfoToolTipOpen}
           onClose={handleClickClosePopup}
-          isSignUp={isSignedUp}
+          // isSignUp={isSignedUp}
           name={"infoToolTip"}
         />
       </div>

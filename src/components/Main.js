@@ -12,16 +12,19 @@ const Main = ({
   cards,
   onLikeClick,
   onDeleteClick,
+  signOut,
+  userEmail,
 }) => {
-  const { currentUser, userData, authUserData } = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   return (
     <>
       <Header
         mix={"page__header section"}
-        userEmail={authUserData.email}
+        userEmail={userEmail}
         buttonText={"Выйти"}
         endPoint={"/sign-in"}
+        signOut={signOut}
       />
       <main className="content page__content section section_size_narrow">
         <section className="profile">

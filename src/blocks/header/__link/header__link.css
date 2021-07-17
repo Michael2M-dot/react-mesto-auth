@@ -1,6 +1,6 @@
 .header__link {
   text-decoration: none;
-  color: var(--color__main-text_profile)
+  color: var(--color__main-text_profile);
 }
 
 .header__link:hover {
