@@ -8,7 +8,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Login = () => {
   const history = useHistory();
-  const { setIsSubmitted, isSubmitted, setIsLoggedIn } =
+  const { setIsSubmitted, isSubmitted, setIsLoggedIn, authUser, setAuthUser, setIsInfoToolTipOpen } =
     useContext(CurrentUserContext);
   const [userData, setUserData] = useState({ email: "", password: "" });
 
@@ -44,9 +44,17 @@ const Login = () => {
           history.push("/main");
           setTimeout(() => setIsSubmitted(false), 5000);
         } else {
+            setUserData({
+                email: "",
+                password: "",
+            });
             setIsLoggedIn(false);
             setIsSubmitted(false);
-            alert("Неверный логин или пароль");
+            setIsInfoToolTipOpen(true);
+            setAuthUser({
+                ...authUser,
+                message: "Неверный логин или пароль! Попробуйте еще раз."
+            });
         }
       })
       .catch((err) => {
