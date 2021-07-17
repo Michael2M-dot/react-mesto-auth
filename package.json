@@ -2,7 +2,7 @@
   "name": "react-mesto-auth",
   "version": "0.1.0",
   "description": "Yandex: Учебный проект SPA на React с Rest Api",
-  "homepage": "https://github.com/Michael2M-dot/react-mesto-auth",
+  "homepage": "https://github.com/Michael2M-dot/react-mesto-auth/",
   "author": "Michael2M",
   "private": true,
   "dependencies": {
