@@ -44,7 +44,7 @@ const App = () => {
   //Стэйт переменная для cохранения данных авторизованного пользователя
   // const [authUser, setAuthUser] = useState({});
   const [authUserData, setAuthUserData] = useState({});
-  //стэйт переменная для хранения постового адреса пользователя
+  //стэйт переменная для хранения почтового адреса пользователя
   const [userEmail, setUserEmail] = useState({ email: "" });
   //стэйт переменная для хранения состояния значка просмотра пароля
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -197,7 +197,7 @@ const App = () => {
   };
 
   //функция закрытия всех попапов по нажатию на крестик или клику на оверлей
-  const closeAllPopups = (evt) => {
+  const closeAllPopups = () => {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
