@@ -3,11 +3,8 @@
   align-items: flex-start;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 
   width: 100%;
   min-height: 52px;
 }
-
-/*.form__fieldset:last-of-type {*/
-/*  margin-bottom: 31px;*/
-/*}*/

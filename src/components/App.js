@@ -43,6 +43,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   //Стэйт переменная для cохранения данных авторизованного пользователя
   const [authUser, setAuthUser] = useState({});
+  const [isShowPassword, setIsShowPassword ] = useState(false)
   const history = useHistory();
 
   //получаем массив исходных карточек
@@ -251,7 +252,6 @@ const App = () => {
   //функция проверки токена пользователя
   const handleTokenCheck = () => {
     const token = localStorage.getItem("jwt");
-    console.log(token);
 
     if (token) {
       auth.checkToken(token).then((res) => {
@@ -262,6 +262,16 @@ const App = () => {
       });
     }
   };
+
+  // const handlePasswordVisible = (e) => {
+  //   if(e.target.type === 'password') {
+  //     setIsShowPassword(true)
+  //     e.target.setAttribute('type', 'text')
+  //   } else {
+  //     setIsShowPassword(false)
+  //     e.target.setAttribute('type', 'password')
+  //   }
+  // }
 
   return (
     <CurrentUserContext.Provider
@@ -277,6 +287,8 @@ const App = () => {
         setIsSignUp,
         isInfoToolTipOpen,
         setIsInfoToolTipOpen,
+        isShowPassword,
+        setIsShowPassword
       }}
     >
       <div className="page">

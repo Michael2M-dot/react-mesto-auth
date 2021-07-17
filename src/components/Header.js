@@ -17,7 +17,7 @@ const Header = ({ mix, buttonText, userEmail, endPoint }) => {
 
   return (
     <header className={cx(mix, "header")}>
-      <a href="#" className="logo" target="_self">
+      <a href="/" className="logo" target="_self">
         <img src={Logo} alt="Логотип MESTO" className="header__logo" />
       </a>
       <ul className="header__menu">

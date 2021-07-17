@@ -40,7 +40,6 @@ const Login = () => {
     auth
       .authorize(userData.password, userData.email)
       .then((data) => {
-        console.log(data);
         if (data) {
           setUserData({
             email: "",
@@ -95,6 +94,7 @@ const Login = () => {
           maxLength="30"
           // minLength="2"
           onChange={handleChange}
+          // isShowPassword={isShowPassword}
         />
         <Input
           type="password"
@@ -107,6 +107,8 @@ const Login = () => {
           // maxLength="30"
           // minLength="2"
           onChange={handleChange}
+          // isShowPassword={isShowPassword}
+          // handlePasswordVisibleClick={handlePasswordVisible}
         />
       </InitialPageWithForm>
     </>
