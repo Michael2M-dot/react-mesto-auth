@@ -19,6 +19,6 @@ HTML, CSS, JavaScript, React.js, React-Router-Dom, BEM, Rest.api
 - Исправить баг с нажатием иконки для отображения пароля (включается сразу на двух полях)
 - Добавить светлую и темную тему на страницу с переключением по флажку и автоматическое переключение по системному времени пользователя.
 
-**[Ссылка на работу](https://michael2m-dot.github.io/mesto-react/index.html)** на GitHub Pages.
+**[Ссылка на работу](https://michael2m-dot.github.io/react-mesto-auth/index.html)** на GitHub Pages.
 
 Предложения и пожелания присылать на почту "darak.ltd@yandex.ru"
