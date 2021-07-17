@@ -23,7 +23,7 @@ const Header = ({ mix, buttonText, userEmail, endPoint }) => {
       <ul className="header__menu">
         <li className="header__item">{userEmail}</li>
         <li>
-          <NavLink className="header__item" to={endPoint} onClick={signOut}>
+          <NavLink className="header__item header__link" to={endPoint} onClick={signOut}>
             {buttonText}
           </NavLink>
         </li>
