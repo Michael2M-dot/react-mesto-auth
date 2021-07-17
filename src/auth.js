@@ -46,6 +46,8 @@ export const authorize = (password, identifier) => {
     .then((res) => {
       if (res.status === 200) {
         return res.json();
+      } else {
+        return Promise.reject(`Ошибка: ${res.status}`);
       }
     })
     .then((data) => {
@@ -54,7 +56,7 @@ export const authorize = (password, identifier) => {
         return data;
       }
     })
-    .then((data) => data)
+    // .then((data) => data)
     .catch((err) => console.log(`Ошибка при авторизации пользователя: ${err}`));
 };
 
@@ -71,6 +73,8 @@ export const checkToken = (token) => {
     .then((res) => {
       if (res.ok) {
         return res.json();
+      }else{
+        localStorage.removeItem('jwt')
       }
     })
     .then((data) => data)

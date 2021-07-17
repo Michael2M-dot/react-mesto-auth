@@ -34,6 +34,7 @@ const Login = () => {
     auth
       .authorize(userData.password, userData.email)
       .then((data) => {
+          console.log(data)
         if (data) {
           setUserData({
             email: "",
@@ -42,6 +43,10 @@ const Login = () => {
           setIsLoggedIn(true);
           history.push("/main");
           setTimeout(() => setIsSubmitted(false), 5000);
+        } else {
+            setIsLoggedIn(false);
+            setIsSubmitted(false);
+            alert("Неверный логин или пароль");
         }
       })
       .catch((err) => {
