@@ -14,7 +14,7 @@ const Register = () => {
     setIsSignUp,
     setAuthUser,
     authUser,
-    setIsShowPassword
+    setIsShowPassword,
   } = useContext(CurrentUserContext);
   const [userData, setUserData] = useState({
     email: "",
@@ -42,6 +42,7 @@ const Register = () => {
       setIsSubmitted(true);
 
       auth.register(userData.password, userData.email).then((res) => {
+        console.log(res);
         if (res) {
           setAuthUser({
             ...authUser,
@@ -57,23 +58,25 @@ const Register = () => {
             ...authUser,
             message: "Что-то пошло не так! Попробуйте еще раз.",
           });
+          setIsInfoToolTipOpen(true);
           setIsSignUp(false);
           setIsShowPassword(false);
+          setIsSubmitted(false);
         }
       });
     } else {
-        setUserData({
-          ...userData,
-          password:"",
-          confirmPassword: ""
-        })
-        setAuthUser({
-          ...authUser,
-          message: "Пароли не совпадают! Попробуйте еще раз",
-        });
-        setIsSignUp(false);
-        setIsShowPassword(false);
-        setIsInfoToolTipOpen(true);
+      setUserData({
+        ...userData,
+        password: "",
+        confirmPassword: "",
+      });
+      setAuthUser({
+        ...authUser,
+        message: "Пароли не совпадают! Попробуйте еще раз",
+      });
+      setIsSignUp(false);
+      setIsShowPassword(false);
+      setIsInfoToolTipOpen(true);
     }
   };
 

@@ -21,13 +21,17 @@ export const register = (password, email) => {
           return res.json();
         }
       } catch (err) {
-        return err;
+        return err.log;
       }
+      console.log(res);
     })
     .then((response) => {
       return response;
     })
-    .catch((err) => console.log(`Ошибка регистрации пользователя: ${err}`));
+    .catch((err) => {
+      console.log(`Ошибка регистрации пользователя: ${err}`);
+      alert(err.message);
+    });
 };
 
 //авторизация пользователя на сервере + получение токена

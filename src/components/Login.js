@@ -15,7 +15,7 @@ const Login = () => {
     authUser,
     setAuthUser,
     setIsInfoToolTipOpen,
-    setIsShowPassword
+    setIsShowPassword,
   } = useContext(CurrentUserContext);
   const [userData, setUserData] = useState({ email: "", password: "" });
 

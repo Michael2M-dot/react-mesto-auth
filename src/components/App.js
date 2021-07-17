@@ -43,7 +43,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   //Стэйт переменная для cохранения данных авторизованного пользователя
   const [authUser, setAuthUser] = useState({});
-  const [isShowPassword, setIsShowPassword ] = useState(false)
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const history = useHistory();
 
   //получаем массив исходных карточек
@@ -263,7 +263,6 @@ const App = () => {
     }
   };
 
-
   return (
     <CurrentUserContext.Provider
       value={{
@@ -279,7 +278,7 @@ const App = () => {
         isInfoToolTipOpen,
         setIsInfoToolTipOpen,
         isShowPassword,
-        setIsShowPassword
+        setIsShowPassword,
       }}
     >
       <div className="page">
