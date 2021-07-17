@@ -1,22 +1,10 @@
-import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import Header from "./Header";
 import InitialPageWithForm from "./InitialPageWithForm";
 import Input from "./Input";
-import * as auth from "../auth";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-const Login = () => {
-  const history = useHistory();
-  const {
-    setIsSubmitted,
-    isSubmitted,
-    setIsLoggedIn,
-    authUser,
-    setAuthUser,
-    setIsInfoToolTipOpen,
-    setIsShowPassword,
-  } = useContext(CurrentUserContext);
+const Login = ({ handleLogin, isSubmitted }) => {
+  //стэйт переменная хранения полей ввода
   const [userData, setUserData] = useState({ email: "", password: "" });
 
   //обработчик события на инпутах
@@ -36,40 +24,7 @@ const Login = () => {
       return;
     }
 
-    setIsSubmitted(true);
-
-    auth
-      .authorize(userData.password, userData.email)
-      .then((data) => {
-        if (data) {
-          setUserData({
-            email: "",
-            password: "",
-          });
-          setIsLoggedIn(true);
-          setIsShowPassword(false);
-          history.push("/main");
-          setTimeout(() => setIsSubmitted(false), 5000);
-        } else {
-          setUserData({
-            email: "",
-            password: "",
-          });
-          setIsLoggedIn(false);
-          setIsSubmitted(false);
-          setIsInfoToolTipOpen(true);
-          setIsShowPassword(false);
-          setAuthUser({
-            ...authUser,
-            message: "Неверный логин или пароль! Попробуйте еще раз.",
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(`Ошибка авторизации пользователя: ${err.status}`);
-        setIsSubmitted(false);
-        setIsShowPassword(false);
-      });
+    handleLogin (userData.password, userData.email);
   };
 
   return (
@@ -95,8 +50,8 @@ const Login = () => {
           name="email"
           colormodifier={"form__login-input"}
           required={true}
-          maxLength="30"
-          minLength="5"
+          // maxLength="30"
+          // minLength="5"
           onChange={handleChange}
         />
         <Input
@@ -107,7 +62,7 @@ const Login = () => {
           name="password"
           colormodifier={"form__login-input"}
           required={true}
-          minLength="6"
+          // minLength="6"
           onChange={handleChange}
         />
       </InitialPageWithForm>

@@ -26,8 +26,7 @@ const Input = (props) => {
         id={`${props.id}-input`}
       />
       {props.type === "password" && (
-        <a
-          href="/"
+        <span
           onClick={handlePasswordVisible}
           className={`form__password-control ${
             isShowPassword ? "form__password-control_visible" : ""

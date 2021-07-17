@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const InfoToolTip = ({ isOpen, onClose, name }) => {
-  const { authUser, isSignedUp } = useContext(CurrentUserContext);
+  const { isSignedUp, authUserData } = useContext(CurrentUserContext);
   return (
     <section
       className={`popup page__popup section ${
@@ -20,7 +20,7 @@ const InfoToolTip = ({ isOpen, onClose, name }) => {
           }`}
         />
         <h2 className="popup__title popup__title_pos_centered">
-          {authUser.message}
+          {authUserData.message}
         </h2>
         <button
           arial-lable="Закрыть форму без сохранения данных"

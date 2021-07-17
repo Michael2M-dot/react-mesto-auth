@@ -20,18 +20,18 @@ const Header = ({ mix, buttonText, userEmail, endPoint }) => {
       <a href="/" className="logo" target="_self">
         <img src={Logo} alt="Логотип MESTO" className="header__logo" />
       </a>
-      <ul className="header__menu">
-        <li className="header__item">{userEmail}</li>
-        <li>
+      <div className="header__menu">
+        <p className="header__item">{userEmail}</p>
+        <p className="header__item">
           <NavLink
-            className="header__item header__link"
+            className="header__link"
             to={endPoint}
             onClick={signOut}
           >
             {buttonText}
           </NavLink>
-        </li>
-      </ul>
+        </p>
+      </div>
     </header>
   );
 };

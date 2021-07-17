@@ -42,7 +42,8 @@ const App = () => {
   //Стэйт переменная для хранения данных пользователя
   const [currentUser, setCurrentUser] = useState({});
   //Стэйт переменная для cохранения данных авторизованного пользователя
-  const [authUser, setAuthUser] = useState({});
+  // const [authUser, setAuthUser] = useState({});
+  const [authUserData, setAuthUserData] = useState({});
   const [isShowPassword, setIsShowPassword] = useState(false);
   const history = useHistory();
 
@@ -244,6 +245,41 @@ const App = () => {
     }
   };
 
+
+  const handleLogin = (password, email) => {
+    setIsSubmitted(true);
+
+    auth
+        .authorize(password, email)
+        .then((data) => {
+          if (data) {
+            setAuthUserData({
+              email: "",
+              password: "",
+            });
+            setIsLoggedIn(true);
+            setIsShowPassword(false);
+            history.push("/main");
+            setTimeout(() => setIsSubmitted(false), 3000);
+          } else {
+            setAuthUserData({
+              ...authUserData,
+              message: "Неверный логин или пароль! Попробуйте еще раз.",
+            });
+            setIsLoggedIn(false);
+            setIsSubmitted(false);
+            setIsInfoToolTipOpen(true);
+            setIsShowPassword(false);
+          }
+        })
+        .catch((err) => {
+          console.log(`Ошибка авторизации пользователя: ${err.status}`);
+          setIsSubmitted(false);
+          setIsShowPassword(false);
+        });
+  }
+
+
   //функция проверки токена для автоматической авторизации пользователя
   useEffect(() => {
     handleTokenCheck();
@@ -256,7 +292,10 @@ const App = () => {
     if (token) {
       auth.checkToken(token).then((res) => {
         const { data } = res;
-        setAuthUser(data.email);
+        setAuthUserData({
+          ...authUserData,
+          email: data.email
+        });
         setIsLoggedIn(true);
         history.push("/main");
       });
@@ -271,21 +310,21 @@ const App = () => {
         setIsLoggedIn,
         isSubmitted,
         setIsSubmitted,
-        setAuthUser,
-        authUser,
+        // setAuthUser,
+        // authUser,
         isSignedUp,
         setIsSignUp,
         isInfoToolTipOpen,
         setIsInfoToolTipOpen,
         isShowPassword,
         setIsShowPassword,
+        authUserData
       }}
     >
       <div className="page">
         <div className="page__container">
           <Switch>
             <ProtectedRoute
-              exact
               path="/main"
               component={Main}
               onEditProfile={handleEditProfileClick}
@@ -298,7 +337,10 @@ const App = () => {
               to={"/sign-in"}
             />
             <Route path="/sign-in">
-              <Login />
+              <Login
+                  handleLogin={handleLogin}
+                  isSubmitted={isSubmitted}
+              />
             </Route>
             <Route path="/sign-up">
               <Register />

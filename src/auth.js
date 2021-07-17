@@ -21,16 +21,15 @@ export const register = (password, email) => {
           return res.json();
         }
       } catch (err) {
-        return err.log;
+        return err;
       }
-      console.log(res);
     })
     .then((response) => {
       return response;
     })
     .catch((err) => {
       console.log(`Ошибка регистрации пользователя: ${err}`);
-      alert(err.message);
+      // alert(err.message);
     });
 };
 
@@ -61,7 +60,7 @@ export const authorize = (password, identifier) => {
           return data;
         }
       })
-      // .then((data) => data)
+      .then((data) => data)
       .catch((err) =>
         console.log(`Ошибка при авторизации пользователя: ${err}`)
       )

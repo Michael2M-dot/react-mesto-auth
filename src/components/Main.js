@@ -13,13 +13,13 @@ const Main = ({
   onLikeClick,
   onDeleteClick,
 }) => {
-  const { currentUser, authUser } = useContext(CurrentUserContext);
+  const { currentUser, userData, authUserData } = useContext(CurrentUserContext);
 
   return (
     <>
       <Header
         mix={"page__header section"}
-        userEmail={authUser}
+        userEmail={authUserData.email}
         buttonText={"Выйти"}
         endPoint={"/sign-in"}
       />
