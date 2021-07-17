@@ -44,9 +44,10 @@ const Login = () => {
           setTimeout(() => setIsSubmitted(false), 5000);
         }
       })
-      .catch((err) =>
-        console.log(`Ошибка авторизации пользователя: ${err.status}`)
-      );
+      .catch((err) => {
+            console.log(`Ошибка авторизации пользователя: ${err.status}`);
+            setIsSubmitted(false);
+      });
   };
 
   console.log(isSubmitted);

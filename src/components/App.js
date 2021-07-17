@@ -5,12 +5,13 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
-import api from "../utils/api";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithSubmit from "./PopupWithSubmit";
 import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
+import InfoToolTip from "./InfoToolTip";
+import api from "../utils/api";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import * as auth from "../auth";
 
 const App = () => {
@@ -24,10 +25,14 @@ const App = () => {
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   //Стэйт переменная для открытия попапа подтверждения действия пользователя
   const [isPopupWithSubmitOpen, setIsPopupWithSubmitOpen] = useState(false);
+  //Стэйт переменная открытия попапа результатов регистрации пользователя
+  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = useState(false);
   //Стэйт переменная сабмита формы
   const [isSubmitted, setIsSubmitted] = useState(false);
   //Стэйт переменная авторизации пользователя
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //Стэйт переменная регистрации нового пользователя
+  const [isSignedUp, setIsSignUp] =useState(false)
   //Стэйт переменная для временного хранения данных о выбраной карточке
   const [selectedCard, setSelectedCard] = useState({});
   //Стэйт переменная для карточки
@@ -36,7 +41,7 @@ const App = () => {
   const [deletedCardData, setDeletedCardData] = useState({});
   //Стэйт переменная для хранения данных пользователя
   const [currentUser, setCurrentUser] = useState({});
-  //Стэйт переменная для охранения данных авторизованного пользователя
+  //Стэйт переменная для cохранения данных авторизованного пользователя
   const [authUser, setAuthUser] = useState({});
   const history = useHistory();
 
@@ -193,6 +198,7 @@ const App = () => {
     setIsAddPlacePopupOpen(false);
     setIsImagePopupOpen(false);
     setIsPopupWithSubmitOpen(false);
+    setIsInfoToolTipOpen(false)
   };
 
   //установка слушателя для закрытия попапа по ESC
@@ -202,7 +208,8 @@ const App = () => {
       isAddPlacePopupOpen ||
       isEditAvatarPopupOpen ||
       isImagePopupOpen ||
-      isPopupWithSubmitOpen
+      isPopupWithSubmitOpen ||
+      isInfoToolTipOpen
     ) {
       document.addEventListener("keydown", handleEscClose);
     }
@@ -216,6 +223,7 @@ const App = () => {
     isEditAvatarPopupOpen,
     isImagePopupOpen,
     isPopupWithSubmitOpen,
+    isInfoToolTipOpen
   ]);
 
   //обработчик закрытия попапов по клику на оверлей или крестик
@@ -263,7 +271,12 @@ const App = () => {
         setIsLoggedIn,
         isSubmitted,
         setIsSubmitted,
+        setAuthUser,
         authUser,
+        isSignedUp,
+        setIsSignUp,
+        isInfoToolTipOpen,
+        setIsInfoToolTipOpen
       }}
     >
       <div className="page">
@@ -332,6 +345,14 @@ const App = () => {
           deleteCard={handleCardDelete}
           data={deletedCardData}
         />
+
+        <InfoToolTip
+          isOpen={isInfoToolTipOpen}
+          onClose={handleClickClosePopup}
+          isSignUp={isSignedUp}
+          name={"infoToolTip"}
+        />
+
       </div>
     </CurrentUserContext.Provider>
   );

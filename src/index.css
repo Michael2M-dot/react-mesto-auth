@@ -48,6 +48,9 @@
 @import url(./blocks/page/__popup/page__popup.css);
 @import url(./blocks/popup/popup.css);
 @import url(./blocks/page/__popup/_visible/page__popup_visible.css);
+@import url(blocks/popup/__icon/popup__icon.css);
+@import url(blocks/popup/__icon/_status/popup__icon_status_succeed.css);
+@import url(blocks/popup/__icon/_status/popup__ison_satus_fault.css);
 @import url(./blocks/popup/__window/popup__window.css);
 @import url(./blocks/popup/__window/_size/popup__window_size_s.css);
 @import url(./blocks/popup/__window/_size/popup__window_size_l.css);

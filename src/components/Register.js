@@ -7,7 +7,7 @@ import * as auth from "../auth";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Register = () => {
-  const { isSubmitted, setIsSubmitted } = useContext(CurrentUserContext);
+  const { isSubmitted, setIsSubmitted, setIsInfoToolTipOpen, setIsSignUp, setAuthUser, authUser } = useContext(CurrentUserContext);
   const [userData, setUserData] = useState({ email: "", password: "" });
   const history = useHistory();
 
@@ -29,20 +29,22 @@ const Register = () => {
 
     auth.register(userData.password, userData.email).then((res) => {
       if (res) {
-        setUserData({
-          ...userData,
-          message: "Регистрация прошла успешно, Вы зарегистрированы!",
+        setAuthUser({
+          ...authUser,
+          message: "Вы успешно зарегистрировались!",
         });
-
+        setIsInfoToolTipOpen(true);
+        setIsSignUp(true);
         history.push("/sign-in");
         setTimeout(() => setIsSubmitted(false), 5000);
       } else {
-        setUserData({
-          ...userData,
-          message: "Что-то пошло не так с регистрацией пользователя",
+        setAuthUser({
+          ...authUser,
+          message: "Что-то пошло не так! Попробуйте еще раз.",
         });
+        setIsSignUp(false)
       }
-    });
+    })
   };
 
   return (
