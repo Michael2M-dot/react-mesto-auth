@@ -32,32 +32,36 @@ export const register = (password, email) => {
 
 //авторизация пользователя на сервере + получение токена
 export const authorize = (password, identifier) => {
-  return fetch(`${BASE_URL}/signin`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      password: password,
-      email: identifier,
-    }),
-  })
-    .then((res) => {
-      if (res.status === 200) {
-        return res.json();
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
+  return (
+    fetch(`${BASE_URL}/signin`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password: password,
+        email: identifier,
+      }),
     })
-    .then((data) => {
-      if (data.token) {
-        localStorage.setItem("jwt", data.token);
-        return data;
-      }
-    })
-    // .then((data) => data)
-    .catch((err) => console.log(`Ошибка при авторизации пользователя: ${err}`));
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          return Promise.reject(`Ошибка: ${res.status}`);
+        }
+      })
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
+          return data;
+        }
+      })
+      // .then((data) => data)
+      .catch((err) =>
+        console.log(`Ошибка при авторизации пользователя: ${err}`)
+      )
+  );
 };
 
 //проверка валидности токена на стороне сервера
@@ -73,8 +77,8 @@ export const checkToken = (token) => {
     .then((res) => {
       if (res.ok) {
         return res.json();
-      }else{
-        localStorage.removeItem('jwt')
+      } else {
+        localStorage.removeItem("jwt");
       }
     })
     .then((data) => data)

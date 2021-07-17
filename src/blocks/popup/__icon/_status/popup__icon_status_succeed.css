@@ -1,6 +1,6 @@
-.popup__icon_status_succeed{
-    background-image: url("../../../../images/signup-icon_succeed.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+.popup__icon_status_succeed {
+  background-image: url("../../../../images/signup-icon_succeed.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }

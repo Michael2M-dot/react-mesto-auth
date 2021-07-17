@@ -1,7 +1,7 @@
-.header__link {
+.popup__link {
   text-decoration: none;
 }
 
-.header__link:hover {
+.popup__link:hover {
   opacity: 0.6;
 }

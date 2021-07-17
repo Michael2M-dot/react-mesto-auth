@@ -47,7 +47,7 @@ const InitialPageWithForm = ({
           {userSignUp && (
             <div className="popup__footer">
               <p className="popup__subtitle">Уже зарегистрированы?</p>
-              <Link className="popup__subtitle" to="/sign-in">
+              <Link className="popup__subtitle popup__link" to="/sign-in">
                 {userSignUp}
               </Link>
             </div>

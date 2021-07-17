@@ -8,8 +8,14 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Login = () => {
   const history = useHistory();
-  const { setIsSubmitted, isSubmitted, setIsLoggedIn, authUser, setAuthUser, setIsInfoToolTipOpen } =
-    useContext(CurrentUserContext);
+  const {
+    setIsSubmitted,
+    isSubmitted,
+    setIsLoggedIn,
+    authUser,
+    setAuthUser,
+    setIsInfoToolTipOpen,
+  } = useContext(CurrentUserContext);
   const [userData, setUserData] = useState({ email: "", password: "" });
 
   //обработчик события на инпутах
@@ -34,7 +40,7 @@ const Login = () => {
     auth
       .authorize(userData.password, userData.email)
       .then((data) => {
-          console.log(data)
+        console.log(data);
         if (data) {
           setUserData({
             email: "",
@@ -44,22 +50,22 @@ const Login = () => {
           history.push("/main");
           setTimeout(() => setIsSubmitted(false), 5000);
         } else {
-            setUserData({
-                email: "",
-                password: "",
-            });
-            setIsLoggedIn(false);
-            setIsSubmitted(false);
-            setIsInfoToolTipOpen(true);
-            setAuthUser({
-                ...authUser,
-                message: "Неверный логин или пароль! Попробуйте еще раз."
-            });
+          setUserData({
+            email: "",
+            password: "",
+          });
+          setIsLoggedIn(false);
+          setIsSubmitted(false);
+          setIsInfoToolTipOpen(true);
+          setAuthUser({
+            ...authUser,
+            message: "Неверный логин или пароль! Попробуйте еще раз.",
+          });
         }
       })
       .catch((err) => {
-            console.log(`Ошибка авторизации пользователя: ${err.status}`);
-            setIsSubmitted(false);
+        console.log(`Ошибка авторизации пользователя: ${err.status}`);
+        setIsSubmitted(false);
       });
   };
 

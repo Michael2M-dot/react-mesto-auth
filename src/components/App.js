@@ -32,7 +32,7 @@ const App = () => {
   //Стэйт переменная авторизации пользователя
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   //Стэйт переменная регистрации нового пользователя
-  const [isSignedUp, setIsSignUp] =useState(false)
+  const [isSignedUp, setIsSignUp] = useState(false);
   //Стэйт переменная для временного хранения данных о выбраной карточке
   const [selectedCard, setSelectedCard] = useState({});
   //Стэйт переменная для карточки
@@ -198,7 +198,7 @@ const App = () => {
     setIsAddPlacePopupOpen(false);
     setIsImagePopupOpen(false);
     setIsPopupWithSubmitOpen(false);
-    setIsInfoToolTipOpen(false)
+    setIsInfoToolTipOpen(false);
   };
 
   //установка слушателя для закрытия попапа по ESC
@@ -223,7 +223,7 @@ const App = () => {
     isEditAvatarPopupOpen,
     isImagePopupOpen,
     isPopupWithSubmitOpen,
-    isInfoToolTipOpen
+    isInfoToolTipOpen,
   ]);
 
   //обработчик закрытия попапов по клику на оверлей или крестик
@@ -276,7 +276,7 @@ const App = () => {
         isSignedUp,
         setIsSignUp,
         isInfoToolTipOpen,
-        setIsInfoToolTipOpen
+        setIsInfoToolTipOpen,
       }}
     >
       <div className="page">
@@ -352,7 +352,6 @@ const App = () => {
           isSignUp={isSignedUp}
           name={"infoToolTip"}
         />
-
       </div>
     </CurrentUserContext.Provider>
   );
