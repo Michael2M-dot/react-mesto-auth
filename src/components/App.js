@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Redirect,
-  useHistory,
-} from "react-router-dom";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import Main from "./Main";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
@@ -20,17 +14,29 @@ import ProtectedRoute from "./ProtectedRoute";
 import * as auth from "../auth";
 
 const App = () => {
+  //Стэйт переменная для открытия попапа редактирования профиля
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  //Стэйт переменная для открытия попапа добавления новой карточки
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  //Стэйт переменная для открытия попапа редактирования аватара пользователя
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  //Стэйт переменная для открытия попапа полноразмерного простмотра изображения
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
+  //Стэйт переменная для открытия попапа подтверждения действия пользователя
   const [isPopupWithSubmitOpen, setIsPopupWithSubmitOpen] = useState(false);
+  //Стэйт переменная сабмита формы
   const [isSubmitted, setIsSubmitted] = useState(false);
+  //Стэйт переменная авторизации пользователя
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [selectedCard, setSelectedCard] = useState({}); //стэйт создан для хранения данных о карточке, без него после закрытия на мгновенье появляется окно с alt
+  //Стэйт переменная для временного хранения данных о выбраной карточке
+  const [selectedCard, setSelectedCard] = useState({});
+  //Стэйт переменная для карточки
   const [cards, setCards] = useState([]);
+  //Стэйт переменная для хранения данных удаляемой карточки
   const [deletedCardData, setDeletedCardData] = useState({});
+  //Стэйт переменная для хранения данных пользователя
   const [currentUser, setCurrentUser] = useState({});
+  //Стэйт переменная для охранения данных авторизованного пользователя
   const [authUser, setAuthUser] = useState({});
   const history = useHistory();
 
@@ -232,104 +238,102 @@ const App = () => {
   //функция проверки токена для автоматической авторизации пользователя
   useEffect(() => {
     handleTokenCheck();
-  }, [ history ]);
-
+  }, [history]);
 
   //функция проверки токена пользователя
   const handleTokenCheck = () => {
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem("jwt");
     console.log(token);
 
     if (token) {
-      auth
-        .checkToken(token)
-        .then((res) => {
-          const { data } = res;
-          setAuthUser(data.email);
-          setIsLoggedIn(true);
-          history.push('/main');
-        })
+      auth.checkToken(token).then((res) => {
+        const { data } = res;
+        setAuthUser(data.email);
+        setIsLoggedIn(true);
+        history.push("/main");
+      });
     }
   };
 
   return (
-      <CurrentUserContext.Provider
-        value={{
-          currentUser,
-          isLoggedIn,
-          setIsLoggedIn,
-          isSubmitted,
-          setIsSubmitted,
-          authUser,
-        }}
-      >
-        <div className="page">
-          <div className="page__container">
-            <Switch>
-              <ProtectedRoute
-                exact path='/main'
-                component={Main}
-                onEditProfile={handleEditProfileClick}
-                onEditAvatar={handleEditAvatarClick}
-                onAddPlace={handleAddPlaceClick}
-                onCardClick={handleCardClick}
-                cards={cards}
-                onLikeClick={handleCardLike}
-                onDeleteClick={handlePopupWithForm}
-                to={'/sign-in'}
-              />
-              <Route path='/sign-in'>
-                <Login />
-              </Route>
-              <Route path='/sign-up'>
-                <Register />
-              </Route>
-              <Route path='/'>
-                {isLoggedIn ? (
-                  <Redirect to='/main' />
-                ) : (
-                  <Redirect to='/sign-in' />
-                )}
-              </Route>
-            </Switch>
-          </div>
-
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={handleClickClosePopup}
-            onUpdateUser={handleUserUpdate}
-            isSubmitted={isSubmitted}
-          />
-
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={handleClickClosePopup}
-            onUpdateAvatar={handleAvatarUpdate}
-            isSubmitted={isSubmitted}
-          />
-
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={handleClickClosePopup}
-            onAddPlace={handleAddCardSubmit}
-            isSubmitted={isSubmitted}
-          />
-
-          <ImagePopup
-            isOpen={isImagePopupOpen}
-            data={selectedCard}
-            onClose={handleClickClosePopup}
-          />
-
-          <PopupWithSubmit
-            isOpen={isPopupWithSubmitOpen}
-            onClose={handleClickClosePopup}
-            isSubmitted={isSubmitted}
-            deleteCard={handleCardDelete}
-            data={deletedCardData}
-          />
+    <CurrentUserContext.Provider
+      value={{
+        currentUser,
+        isLoggedIn,
+        setIsLoggedIn,
+        isSubmitted,
+        setIsSubmitted,
+        authUser,
+      }}
+    >
+      <div className="page">
+        <div className="page__container">
+          <Switch>
+            <ProtectedRoute
+              exact
+              path="/main"
+              component={Main}
+              onEditProfile={handleEditProfileClick}
+              onEditAvatar={handleEditAvatarClick}
+              onAddPlace={handleAddPlaceClick}
+              onCardClick={handleCardClick}
+              cards={cards}
+              onLikeClick={handleCardLike}
+              onDeleteClick={handlePopupWithForm}
+              to={"/sign-in"}
+            />
+            <Route path="/sign-in">
+              <Login />
+            </Route>
+            <Route path="/sign-up">
+              <Register />
+            </Route>
+            <Route path="/">
+              {isLoggedIn ? (
+                <Redirect to="/main" />
+              ) : (
+                <Redirect to="/sign-in" />
+              )}
+            </Route>
+          </Switch>
         </div>
-      </CurrentUserContext.Provider>
+
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={handleClickClosePopup}
+          onUpdateUser={handleUserUpdate}
+          isSubmitted={isSubmitted}
+        />
+
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={handleClickClosePopup}
+          onUpdateAvatar={handleAvatarUpdate}
+          isSubmitted={isSubmitted}
+        />
+
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={handleClickClosePopup}
+          onAddPlace={handleAddCardSubmit}
+          isSubmitted={isSubmitted}
+        />
+
+        <ImagePopup
+          isOpen={isImagePopupOpen}
+          data={selectedCard}
+          onClose={handleClickClosePopup}
+        />
+
+        <PopupWithSubmit
+          isOpen={isPopupWithSubmitOpen}
+          onClose={handleClickClosePopup}
+          isSubmitted={isSubmitted}
+          deleteCard={handleCardDelete}
+          data={deletedCardData}
+        />
+      </div>
+    </CurrentUserContext.Provider>
   );
 };
 

@@ -7,7 +7,7 @@ import * as auth from "../auth";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Register = () => {
-  const appContext = useContext(CurrentUserContext);
+  const { isSubmitted, setIsSubmitted } = useContext(CurrentUserContext);
   const [userData, setUserData] = useState({ email: "", password: "" });
   const history = useHistory();
 
@@ -25,14 +25,17 @@ const Register = () => {
     if (!userData.password || !userData.email) {
       return;
     }
+    setIsSubmitted(true);
+
     auth.register(userData.password, userData.email).then((res) => {
       if (res) {
         setUserData({
           ...userData,
           message: "Регистрация прошла успешно, Вы зарегистрированы!",
         });
-        appContext.setIsSubmitted(true);
-        history.push('/sign-in');
+
+        history.push("/sign-in");
+        setTimeout(() => setIsSubmitted(false), 5000);
       } else {
         setUserData({
           ...userData,
@@ -47,18 +50,15 @@ const Register = () => {
       <Header
         mix={"page__header section"}
         buttonText={"Войти"}
-        endPoint={'/sign-in'}
+        endPoint={"/sign-in"}
       />
       <InitialPageWithForm
         name={"user-sign-up"}
         title={"Регистрация"}
-        button={
-          !appContext.isSubmitted
-            ? "Зарегистрироваться"
-            : "Регистрация нового пользователя"
-        }
+        button={!isSubmitted ? "Зарегистрироваться" : "Идет регистрация"}
         onSubmit={handleSubmit}
         userSignUp={"Войти"}
+        isSubmitted={isSubmitted}
       >
         <Input
           type="email"
@@ -68,7 +68,6 @@ const Register = () => {
           placeholder="Email"
           colormodifier={"form__login-input"}
           required={true}
-          // maxLength="30"
           minLength="2"
           onChange={handleChange}
         />

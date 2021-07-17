@@ -1,13 +1,14 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = "https://auth.nomoreparties.co";
 
+//регистрация пользователя на сервере
 export const register = (password, email) => {
   console.log(password);
   console.log(email);
   return fetch(`${BASE_URL}/signup`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-type': 'application/json',
+      Accept: "application/json",
+      "Content-type": "application/json",
     },
     body: JSON.stringify({
       password: password,
@@ -26,19 +27,16 @@ export const register = (password, email) => {
     .then((response) => {
       return response;
     })
-    .catch((err) =>
-      console.log(`Ошибка регистрации пользователя: ${err}`)
-    );
+    .catch((err) => console.log(`Ошибка регистрации пользователя: ${err}`));
 };
 
+//авторизация пользователя на сервере + получение токена
 export const authorize = (password, identifier) => {
-  console.log(identifier);
-  console.log(password);
   return fetch(`${BASE_URL}/signin`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       password: password,
@@ -52,22 +50,21 @@ export const authorize = (password, identifier) => {
     })
     .then((data) => {
       if (data.token) {
-        localStorage.setItem('jwt', data.token);
+        localStorage.setItem("jwt", data.token);
         return data;
       }
     })
     .then((data) => data)
-    .catch((err) =>
-      console.log(`Ошибка при авторизации пользователя: ${err}`)
-    );
+    .catch((err) => console.log(`Ошибка при авторизации пользователя: ${err}`));
 };
 
+//проверка валидности токена на стороне сервера
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   })

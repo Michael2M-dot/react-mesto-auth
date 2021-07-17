@@ -4,13 +4,14 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const ProtectedRoute = ({ component: Component, ...props }) => {
   const { isLoggedIn } = useContext(CurrentUserContext);
-  console.log(isLoggedIn);
+
   return (
     <Route>
-      {() => isLoggedIn ? <Component {...props} /> :
-          <Redirect to={props.to} />}
+      {() =>
+        isLoggedIn ? <Component {...props} /> : <Redirect to={props.to} />
+      }
     </Route>
   );
-}
+};
 
 export default ProtectedRoute;

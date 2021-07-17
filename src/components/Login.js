@@ -8,7 +8,8 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Login = () => {
   const history = useHistory();
-  const appContext = useContext(CurrentUserContext);
+  const { setIsSubmitted, isSubmitted, setIsLoggedIn } =
+    useContext(CurrentUserContext);
   const [userData, setUserData] = useState({ email: "", password: "" });
 
   //обработчик события на инпутах
@@ -28,6 +29,8 @@ const Login = () => {
       return;
     }
 
+    setIsSubmitted(true);
+
     auth
       .authorize(userData.password, userData.email)
       .then((data) => {
@@ -36,10 +39,9 @@ const Login = () => {
             email: "",
             password: "",
           });
-          appContext.setIsLoggedIn(true);
-          appContext.setIsSubmitted(true);
-          history.push('/main');
-          setTimeout(() => appContext.setIsSubmitted(false), 5000);
+          setIsLoggedIn(true);
+          history.push("/main");
+          setTimeout(() => setIsSubmitted(false), 5000);
         }
       })
       .catch((err) =>
@@ -47,20 +49,21 @@ const Login = () => {
       );
   };
 
+  console.log(isSubmitted);
   return (
     <>
       <Header
         mix={"page__header section"}
         buttonText={"Регистрация"}
-        endPoint={'/sign-up'}
+        endPoint={"/sign-up"}
       />
 
       <InitialPageWithForm
         name={"user-sign-in"}
         title={"Войти"}
-        button={!appContext.isSubmitted ? "Войти" : "Выполняется вход"}
+        button={!isSubmitted ? "Войти" : "Выполняется вход"}
         onSubmit={handleSubmit}
-        isSubmitted={appContext.isSubmitted}
+        isSubmitted={isSubmitted}
       >
         <Input
           type="email"
