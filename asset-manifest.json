@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/Michael2M-dot/react-mesto-auth/static/css/main.1317b52f.chunk.css",
-    "main.js": "/Michael2M-dot/react-mesto-auth/static/js/main.af0039eb.chunk.js",
-    "main.js.map": "/Michael2M-dot/react-mesto-auth/static/js/main.af0039eb.chunk.js.map",
+    "main.css": "/Michael2M-dot/react-mesto-auth/static/css/main.2fa95845.chunk.css",
+    "main.js": "/Michael2M-dot/react-mesto-auth/static/js/main.6785c131.chunk.js",
+    "main.js.map": "/Michael2M-dot/react-mesto-auth/static/js/main.6785c131.chunk.js.map",
     "runtime-main.js": "/Michael2M-dot/react-mesto-auth/static/js/runtime-main.b8b44c9d.js",
     "runtime-main.js.map": "/Michael2M-dot/react-mesto-auth/static/js/runtime-main.b8b44c9d.js.map",
-    "static/js/2.6f055bb3.chunk.js": "/Michael2M-dot/react-mesto-auth/static/js/2.6f055bb3.chunk.js",
-    "static/js/2.6f055bb3.chunk.js.map": "/Michael2M-dot/react-mesto-auth/static/js/2.6f055bb3.chunk.js.map",
+    "static/js/2.a578e608.chunk.js": "/Michael2M-dot/react-mesto-auth/static/js/2.a578e608.chunk.js",
+    "static/js/2.a578e608.chunk.js.map": "/Michael2M-dot/react-mesto-auth/static/js/2.a578e608.chunk.js.map",
     "static/js/3.1ea1ba70.chunk.js": "/Michael2M-dot/react-mesto-auth/static/js/3.1ea1ba70.chunk.js",
     "static/js/3.1ea1ba70.chunk.js.map": "/Michael2M-dot/react-mesto-auth/static/js/3.1ea1ba70.chunk.js.map",
     "index.html": "/Michael2M-dot/react-mesto-auth/index.html",
-    "static/css/main.1317b52f.chunk.css.map": "/Michael2M-dot/react-mesto-auth/static/css/main.1317b52f.chunk.css.map",
-    "static/js/2.6f055bb3.chunk.js.LICENSE.txt": "/Michael2M-dot/react-mesto-auth/static/js/2.6f055bb3.chunk.js.LICENSE.txt",
+    "static/css/main.2fa95845.chunk.css.map": "/Michael2M-dot/react-mesto-auth/static/css/main.2fa95845.chunk.css.map",
+    "static/js/2.a578e608.chunk.js.LICENSE.txt": "/Michael2M-dot/react-mesto-auth/static/js/2.a578e608.chunk.js.LICENSE.txt",
     "static/media/index.css": "/Michael2M-dot/react-mesto-auth/static/media/view.840e9b51.svg",
     "static/media/mesto_logo.6331fea1.svg": "/Michael2M-dot/react-mesto-auth/static/media/mesto_logo.6331fea1.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.b8b44c9d.js",
-    "static/js/2.6f055bb3.chunk.js",
-    "static/css/main.1317b52f.chunk.css",
-    "static/js/main.af0039eb.chunk.js"
+    "static/js/2.a578e608.chunk.js",
+    "static/css/main.2fa95845.chunk.css",
+    "static/js/main.6785c131.chunk.js"
   ]
 }
