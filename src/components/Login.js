@@ -6,7 +6,7 @@ import Input from "./Input";
 import * as auth from "../auth";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-const Login = ({ isSubmitted }) => {
+const Login = () => {
   const history = useHistory();
   const appContext = useContext(CurrentUserContext);
   const [userData, setUserData] = useState({ email: "", password: "" });
@@ -38,7 +38,7 @@ const Login = ({ isSubmitted }) => {
           });
           appContext.setIsLoggedIn(true);
           appContext.setIsSubmitted(true);
-          history.push("/main");
+          history.push('/main');
           setTimeout(() => appContext.setIsSubmitted(false), 5000);
         }
       })
@@ -52,7 +52,7 @@ const Login = ({ isSubmitted }) => {
       <Header
         mix={"page__header section"}
         buttonText={"Регистрация"}
-        endPoint={"/sign-up"}
+        endPoint={'/sign-up'}
       />
 
       <InitialPageWithForm

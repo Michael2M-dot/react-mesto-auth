@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter,
   Switch,
@@ -6,9 +6,7 @@ import {
   Redirect,
   useHistory,
 } from "react-router-dom";
-import Header from "./Header.js";
 import Main from "./Main";
-import Footer from "./Footer";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
@@ -231,9 +229,15 @@ const App = () => {
     }
   };
 
+  //функция проверки токена для автоматической авторизации пользователя
+  useEffect(() => {
+    handleTokenCheck();
+  }, [ history ]);
+
+
   //функция проверки токена пользователя
   const handleTokenCheck = () => {
-    const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem('jwt');
     console.log(token);
 
     if (token) {
@@ -243,20 +247,12 @@ const App = () => {
           const { data } = res;
           setAuthUser(data.email);
           setIsLoggedIn(true);
+          history.push('/main');
         })
-        .then(() => {
-          history.push("/main");
-        });
     }
   };
 
-  //функция проверки токена
-  useEffect(() => {
-    handleTokenCheck();
-  }, []);
-
   return (
-    <BrowserRouter>
       <CurrentUserContext.Provider
         value={{
           currentUser,
@@ -271,7 +267,8 @@ const App = () => {
           <div className="page__container">
             <Switch>
               <ProtectedRoute
-                path="/main"
+                exact path='/main'
+                component={Main}
                 onEditProfile={handleEditProfileClick}
                 onEditAvatar={handleEditAvatarClick}
                 onAddPlace={handleAddPlaceClick}
@@ -279,21 +276,19 @@ const App = () => {
                 cards={cards}
                 onLikeClick={handleCardLike}
                 onDeleteClick={handlePopupWithForm}
-                component={Main}
-                to={"/sign-in"}
-                isLoggedIn={isLoggedIn}
+                to={'/sign-in'}
               />
-              <Route path="/sign-in">
-                <Login isSubmited={isSubmitted} />
+              <Route path='/sign-in'>
+                <Login />
               </Route>
-              <Route path="/sign-up">
+              <Route path='/sign-up'>
                 <Register />
               </Route>
-              <Route path="/">
+              <Route path='/'>
                 {isLoggedIn ? (
-                  <Redirect to="/main" />
+                  <Redirect to='/main' />
                 ) : (
-                  <Redirect to="/login" />
+                  <Redirect to='/sign-in' />
                 )}
               </Route>
             </Switch>
@@ -335,7 +330,6 @@ const App = () => {
           />
         </div>
       </CurrentUserContext.Provider>
-    </BrowserRouter>
   );
 };
 

@@ -32,7 +32,7 @@ const Register = () => {
           message: "Регистрация прошла успешно, Вы зарегистрированы!",
         });
         appContext.setIsSubmitted(true);
-        history.push("/sign-in");
+        history.push('/sign-in');
       } else {
         setUserData({
           ...userData,
@@ -47,7 +47,7 @@ const Register = () => {
       <Header
         mix={"page__header section"}
         buttonText={"Войти"}
-        endPoint={"/sign-in"}
+        endPoint={'/sign-in'}
       />
       <InitialPageWithForm
         name={"user-sign-up"}
