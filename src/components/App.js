@@ -12,7 +12,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import InfoToolTip from "./InfoToolTip";
 import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import * as auth from "../auth";
+import * as auth from "../utils/auth";
 
 const App = () => {
   //Стэйт переменная для открытия попапа редактирования профиля
@@ -42,10 +42,9 @@ const App = () => {
   //Стэйт переменная для хранения данных пользователя
   const [currentUser, setCurrentUser] = useState({});
   //Стэйт переменная для cохранения данных авторизованного пользователя
-  // const [authUser, setAuthUser] = useState({});
   const [authUserData, setAuthUserData] = useState({});
   //стэйт переменная для хранения почтового адреса пользователя
-  const [userEmail, setUserEmail] = useState({ email: "" });
+  const [userEmail, setUserEmail] = useState({});
   //стэйт переменная для хранения состояния значка просмотра пароля
   const [isShowPassword, setIsShowPassword] = useState(false);
   const history = useHistory();
@@ -257,10 +256,12 @@ const App = () => {
       .then((data) => {
         if (data) {
           setAuthUserData({
+            ...authUserData,
             email: "",
             password: "",
           });
           setIsLoggedIn(true);
+          setUserEmail(email);
           setIsShowPassword(false);
           history.push("/main");
           setTimeout(() => setIsSubmitted(false), 3000);
@@ -273,6 +274,7 @@ const App = () => {
           setIsSubmitted(false);
           setIsInfoToolTipOpen(true);
           setIsShowPassword(false);
+          setUserEmail({});
         }
       })
       .catch((err) => {
@@ -326,7 +328,7 @@ const App = () => {
   //функция проверки токена для автоматической авторизации пользователя
   useEffect(() => {
     handleTokenCheck();
-  }, [history]);
+  }, []);
 
   //функция проверки токена пользователя
   const handleTokenCheck = () => {
@@ -338,7 +340,8 @@ const App = () => {
         setUserEmail(data.email);
         setIsLoggedIn(true);
         history.push("/main");
-      });
+      })
+          .catch((err) => console.log(`Ошибка при проверке токена:${err}`))
     }
   };
 
@@ -346,6 +349,7 @@ const App = () => {
   const signOut = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("jwt");
+    setUserEmail({});
     history.push("/sign-in");
   };
 

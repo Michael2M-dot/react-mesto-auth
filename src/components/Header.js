@@ -6,11 +6,13 @@ import { NavLink } from "react-router-dom";
 const Header = ({ mix, buttonText, userEmail, endPoint, signOut }) => {
   return (
     <header className={cx(mix, "header")}>
-      <a href="/" className="logo" target="_self">
+      <NavLink to="" className="logo">
         <img src={Logo} alt="Логотип MESTO" className="header__logo" />
-      </a>
+      </NavLink>
       <div className="header__menu">
-        <p className="header__item">{userEmail}</p>
+          { userEmail &&
+          <p className="header__item">{userEmail}</p>
+          }
         <p className="header__item">
           <NavLink className="header__link" to={endPoint} onClick={signOut}>
             {buttonText}

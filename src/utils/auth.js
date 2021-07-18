@@ -15,22 +15,11 @@ export const register = (password, email) => {
       email: email,
     }),
   })
-    .then((res) => {
-      try {
-        if (res.status === 201) {
-          return res.json();
-        }
-      } catch (err) {
-        return err;
-      }
-    })
+    .then((res) => checkStatus(res)
+    )
     .then((response) => {
       return response;
     })
-    .catch((err) => {
-      console.log(`Ошибка регистрации пользователя: ${err}`);
-      // alert(err.message);
-    });
 };
 
 //авторизация пользователя на сервере + получение токена
@@ -46,21 +35,13 @@ export const authorize = (password, identifier) => {
       email: identifier,
     }),
   })
-    .then((res) => {
-      if (res.status === 200) {
-        return res.json();
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
-    })
+    .then(res => checkStatus(res))
     .then((data) => {
       if (data.token) {
         localStorage.setItem("jwt", data.token);
         return data;
       }
     })
-    .then((data) => data)
-    .catch((err) => console.log(`Ошибка при авторизации пользователя: ${err}`));
 };
 
 //проверка валидности токена на стороне сервера
@@ -81,5 +62,12 @@ export const checkToken = (token) => {
       }
     })
     .then((data) => data)
-    .catch((err) => console.log(`Ошибка при проверке токена:${err}`));
+    // .catch((err) => console.log(`Ошибка при проверке токена:${err}`));
 };
+
+//функция проверки ошибок response
+const checkStatus = (res) => {
+  return res.ok
+      ? res.json()
+      : Promise.reject(`${res.status} ${res.statusText}`);
+}
