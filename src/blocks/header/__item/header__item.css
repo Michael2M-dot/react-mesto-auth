@@ -20,15 +20,13 @@
     text-align: center;
     margin: 40px auto 18px;
   }
-  .header__item:last-of-type{
-    margin-top:0;
+  .header__item:last-of-type {
+    margin-top: 0;
     margin-bottom: 40px;
   }
 
-  .header__item.active{
+  .header__item.active {
     font-size: 18px;
     line-height: 22px;
   }
-
-
 }

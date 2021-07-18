@@ -14,11 +14,11 @@
   z-index: 3;
 }
 
-@media (max-width: 767px){
-  .header__menu{
+@media (max-width: 767px) {
+  .header__menu {
     margin: 0 auto;
     position: fixed;
-    top:-100%;
+    top: -100%;
     left: 0;
     width: 100%;
     max-height: 142px;
@@ -28,10 +28,9 @@
     opacity: 0.8;
     display: block;
     transition: all 0.3s ease-in 0s;
-
   }
 
-  .header__menu.active{
+  .header__menu.active {
     top: 70px;
   }
 }
