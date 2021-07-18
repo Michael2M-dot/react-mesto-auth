@@ -10,9 +10,7 @@ const Header = ({ mix, buttonText, userEmail, endPoint, signOut }) => {
         <img src={Logo} alt="Логотип MESTO" className="header__logo" />
       </NavLink>
       <div className="header__menu">
-          { userEmail &&
-          <p className="header__item">{userEmail}</p>
-          }
+        {userEmail && <p className="header__item">{userEmail}</p>}
         <p className="header__item">
           <NavLink className="header__link" to={endPoint} onClick={signOut}>
             {buttonText}

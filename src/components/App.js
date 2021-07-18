@@ -289,27 +289,30 @@ const App = () => {
     if (password === confirmPassword) {
       setIsSubmitted(true);
 
-      auth.register(password, email).then((res) => {
-        if (res) {
-          setAuthUserData({
-            ...authUserData,
-            message: "Вы успешно зарегистрировались!",
-          });
-          setIsInfoToolTipOpen(true);
-          setIsSignedUp(true);
-          setIsShowPassword(false);
-          history.push("/sign-in");
-        } else {
-          setAuthUserData({
-            ...authUserData,
-            message: "Что-то пошло не так! Попробуйте еще раз.",
-          });
-          setIsInfoToolTipOpen(true);
-          setIsSignedUp(false);
-          setIsShowPassword(false);
-          setIsSubmitted(false);
-        }
-      });
+      auth
+        .register(password, email)
+        .then((res) => {
+          if (res) {
+            setAuthUserData({
+              ...authUserData,
+              message: "Вы успешно зарегистрировались!",
+            });
+            setIsInfoToolTipOpen(true);
+            setIsSignedUp(true);
+            setIsShowPassword(false);
+            history.push("/sign-in");
+          } else {
+            setAuthUserData({
+              ...authUserData,
+              message: "Что-то пошло не так! Попробуйте еще раз.",
+            });
+            setIsInfoToolTipOpen(true);
+            setIsSignedUp(false);
+            setIsShowPassword(false);
+            setIsSubmitted(false);
+          }
+        })
+        .catch((err) => console.log(`Ошибка регистрации пользователя: ${err}`));
     } else {
       setAuthUserData({
         ...authUserData,
@@ -328,20 +331,22 @@ const App = () => {
   //функция проверки токена для автоматической авторизации пользователя
   useEffect(() => {
     handleTokenCheck();
-  }, []);
+  }, [history]);
 
   //функция проверки токена пользователя
   const handleTokenCheck = () => {
     const token = localStorage.getItem("jwt");
 
     if (token) {
-      auth.checkToken(token).then((res) => {
-        const { data } = res;
-        setUserEmail(data.email);
-        setIsLoggedIn(true);
-        history.push("/main");
-      })
-          .catch((err) => console.log(`Ошибка при проверке токена:${err}`))
+      auth
+        .checkToken(token)
+        .then((res) => {
+          const { data } = res;
+          setUserEmail(data.email);
+          setIsLoggedIn(true);
+          history.push("/main");
+        })
+        .catch((err) => console.log(`Ошибка при проверке токена:${err}`));
     }
   };
 

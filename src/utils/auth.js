@@ -15,11 +15,10 @@ export const register = (password, email) => {
       email: email,
     }),
   })
-    .then((res) => checkStatus(res)
-    )
+    .then((res) => checkStatus(res))
     .then((response) => {
       return response;
-    })
+    });
 };
 
 //авторизация пользователя на сервере + получение токена
@@ -35,13 +34,13 @@ export const authorize = (password, identifier) => {
       email: identifier,
     }),
   })
-    .then(res => checkStatus(res))
+    .then((res) => checkStatus(res))
     .then((data) => {
       if (data.token) {
         localStorage.setItem("jwt", data.token);
         return data;
       }
-    })
+    });
 };
 
 //проверка валидности токена на стороне сервера
@@ -61,13 +60,13 @@ export const checkToken = (token) => {
         localStorage.removeItem("jwt");
       }
     })
-    .then((data) => data)
-    // .catch((err) => console.log(`Ошибка при проверке токена:${err}`));
+    .then((data) => data);
+  // .catch((err) => console.log(`Ошибка при проверке токена:${err}`));
 };
 
 //функция проверки ошибок response
 const checkStatus = (res) => {
   return res.ok
-      ? res.json()
-      : Promise.reject(`${res.status} ${res.statusText}`);
-}
+    ? res.json()
+    : Promise.reject(`${res.status} ${res.statusText}`);
+};
