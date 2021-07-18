@@ -26,7 +26,7 @@ const InitialPageWithForm = ({
             arial-lable="Подтвердите действие пользователя"
             type="submit"
             className={`button form__submit-btn form__login-submit-btn ${
-              isSubmitted ? "form__submit-btn_disabled form__login-submit_disabled" : ""
+              isSubmitted ? "form__submit-btn_disabled" : ""
             }`}
             disabled={isSubmitted}
           >

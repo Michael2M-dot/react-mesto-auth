@@ -39,7 +39,7 @@ function PopupWithForm({
             arial-lable="Подтвердите действие пользователя"
             type="submit"
             className={`button form__submit-btn ${
-              idSubmitted ? "form__submit-btn_disabled" : ""
+              !idSubmitted ? "form__submit-btn_disabled" : ""
             }`}
             disabled={idSubmitted}
           >
@@ -47,7 +47,7 @@ function PopupWithForm({
               <div className="button__text">{button}</div>
               <div
                 className={`button__jumping-dots ${
-                  idSubmitted ? "" : "button__jumping-dots_visibility_hidden"
+                  !idSubmitted ? "" : "button__jumping-dots_visibility_hidden"
                 }`}
               >
                 <span className="button__jumping-dots jump">.</span>
