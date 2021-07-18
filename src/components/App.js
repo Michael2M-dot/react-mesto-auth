@@ -47,6 +47,8 @@ const App = () => {
   const [userEmail, setUserEmail] = useState({});
   //стэйт переменная для хранения состояния значка просмотра пароля
   const [isShowPassword, setIsShowPassword] = useState(false);
+  //стэйт переменная для открытия бургена меню на мобильной версии приложения
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
   const history = useHistory();
 
   //получаем массив исходных карточек
@@ -367,6 +369,8 @@ const App = () => {
         setIsShowPassword,
         isShowPassword,
         isSignedUp,
+        isBurgerMenuOpen,
+        setIsBurgerMenuOpen
       }}
     >
       <div className="page">
