@@ -94,7 +94,14 @@ const App = () => {
         console.log(
           `Непредвиденная ошибка при загрузки карточки пользователя: ${err.status} ${err.statusText}`
         );
+        setAuthUserData({
+          ...authUserData,
+          message: `Карточка не добавлена! Попробуйте еще раз.`,
+        });
+        setIsInfoToolTipOpen(true);
+        setIsSubmitted(false);
       });
+    setIsInfoToolTipOpen(false);
   };
 
   //функция управления лайками на карточке
@@ -112,7 +119,13 @@ const App = () => {
         console.log(
           `Ошибка при установке лайка: ${err.status} ${err.statusText}`
         );
+        setAuthUserData({
+          ...authUserData,
+          message: `Что-то пошло не так! Попробуйте еще раз.`,
+        });
+        setIsInfoToolTipOpen(true);
       });
+    setIsInfoToolTipOpen(false);
   };
 
   //функция удаления карточки пользователя
@@ -130,7 +143,13 @@ const App = () => {
         console.log(
           `Ошибка при удалении карточки: ${err.status} ${err.statusText}`
         );
+        setAuthUserData({
+          ...authUserData,
+          message: `Ошибка при удалении карточки! Попробуйте еще раз.`,
+        });
+        setIsInfoToolTipOpen(true);
       });
+    setIsInfoToolTipOpen(false);
   };
 
   //функционал обновления аватара пользователя
@@ -148,7 +167,14 @@ const App = () => {
         console.log(
           `Непредвиденная ошибка при загрузки изображения аватара: ${err.status} ${err.statusText}`
         );
+        setAuthUserData({
+          ...authUserData,
+          message: `Что-то пошло не так! Попробуйте еще раз.`,
+        })
+        setIsInfoToolTipOpen(true)
+        setIsSubmitted(false);
       });
+    setIsInfoToolTipOpen(false)
   };
 
   //функция обновления информации о пользователе
@@ -166,7 +192,14 @@ const App = () => {
         console.log(
           `Непредвиденная ошибка при передаче на сервер данных пользователя: ${err.status} ${err.statusText}`
         );
+        setAuthUserData({
+          ...authUserData,
+          message: `Что-то пошло не так! Попробуйте еще раз.`,
+        })
+        setIsInfoToolTipOpen(true)
+        setIsSubmitted(false);
       });
+    setIsInfoToolTipOpen(false)
   };
 
   //функция управления открытием и закрытием попапов
@@ -314,7 +347,18 @@ const App = () => {
             setIsSubmitted(false);
           }
         })
-        .catch((err) => console.log(`Ошибка регистрации пользователя: ${err}`));
+        .catch((err) => {
+          const errorMessage = String(err);
+          console.log(`Ошибка регистрации пользователя: ${errorMessage.split(':')[1]}`);
+
+          setAuthUserData({
+            ...authUserData,
+            message: `${errorMessage.split(':')[1]}!`,
+          })
+          setIsInfoToolTipOpen(true)
+          setIsSignedUp(false);
+          setIsSubmitted(false);
+        });
     } else {
       setAuthUserData({
         ...authUserData,

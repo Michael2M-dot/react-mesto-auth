@@ -4,9 +4,13 @@
 
   -webkit-transition: opacity 0.1s ease-in-out 0.1s;
   -o-transition: opacity 0.1s ease-in-out 0.1s;
-  transition: opacity 0.1s ease-in-out 0.1s;
+  transition: all 0.1s ease-in-out 0.1s;
+
+  position: relative;
+  z-index: 4;
 }
 
 .logo:hover {
   opacity: 0.5;
+
 }

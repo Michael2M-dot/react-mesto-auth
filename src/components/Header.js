@@ -21,7 +21,7 @@ const Header = ({ mix, buttonText, userEmail, endPoint, signOut }) => {
 
   return (
     <header className={cx(mix, "header")}>
-      <NavLink to="" className="logo">
+      <NavLink to="/main" className="logo">
         <img src={Logo} alt="Логотип MESTO" className="header__logo" />
       </NavLink>
       <div

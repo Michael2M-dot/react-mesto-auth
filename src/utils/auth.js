@@ -15,7 +15,23 @@ export const register = (password, email) => {
       email: email,
     }),
   })
-    .then((res) => checkStatus(res))
+    // .then((res) => checkStatus(res))
+      .then((res) => {
+        if(res.ok){
+          return res.json();
+        } else {
+          if(res.status === 400) {
+            return res.json()
+                .then((json) => {
+                  throw new Error(json.error);
+                })
+          }
+        }
+        //
+        // return res.ok
+        //     ? res.json()
+        //     : res.json.err;
+      })
     .then((response) => {
       return response;
     });

@@ -14,9 +14,9 @@
   width: 100%;
   min-width: 320px;
   max-width: 880px;
-  min-height: 100vh;
+  max-height: 100vh;
   margin: 0 auto;
-  padding-top: 60px;
-
+  padding-top: 180px;
+  position: fixed;
   color: var(--color__main-text_profile);
 }

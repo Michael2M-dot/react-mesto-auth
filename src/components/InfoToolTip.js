@@ -4,6 +4,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 const InfoToolTip = ({ isOpen, onClose, name }) => {
   const { authUserData, isSignedUp } = useContext(CurrentUserContext);
 
+  // console.log(authUserData.message)
   return (
     <section
       className={`popup page__popup section ${
