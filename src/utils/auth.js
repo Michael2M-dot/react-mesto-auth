@@ -27,10 +27,6 @@ export const register = (password, email) => {
                 })
           }
         }
-        //
-        // return res.ok
-        //     ? res.json()
-        //     : res.json.err;
       })
     .then((response) => {
       return response;
@@ -77,7 +73,6 @@ export const checkToken = (token) => {
       }
     })
     .then((data) => data);
-  // .catch((err) => console.log(`Ошибка при проверке токена:${err}`));
 };
 
 //функция проверки ошибок response
