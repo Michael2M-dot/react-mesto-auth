@@ -4,33 +4,34 @@ export const BASE_URL = "https://auth.nomoreparties.co";
 export const register = (password, email) => {
   console.log(password);
   console.log(email);
-  return fetch(`${BASE_URL}/signup`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({
-      password: password,
-      email: email,
-    }),
-  })
-    // .then((res) => checkStatus(res))
+  return (
+    fetch(`${BASE_URL}/signup`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        password: password,
+        email: email,
+      }),
+    })
+      // .then((res) => checkStatus(res))
       .then((res) => {
-        if(res.ok){
+        if (res.ok) {
           return res.json();
         } else {
-          if(res.status === 400) {
-            return res.json()
-                .then((json) => {
-                  throw new Error(json.error);
-                })
+          if (res.status === 400) {
+            return res.json().then((json) => {
+              throw new Error(json.error);
+            });
           }
         }
       })
-    .then((response) => {
-      return response;
-    });
+      .then((response) => {
+        return response;
+      })
+  );
 };
 
 //авторизация пользователя на сервере + получение токена

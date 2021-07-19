@@ -178,8 +178,8 @@ const App = () => {
         setAuthUserData({
           ...authUserData,
           message: `Что-то пошло не так! Попробуйте еще раз.`,
-        })
-        setIsInfoToolTipOpen(true)
+        });
+        setIsInfoToolTipOpen(true);
         setIsSubmitted(false);
       });
   };
@@ -202,8 +202,8 @@ const App = () => {
         setAuthUserData({
           ...authUserData,
           message: `Что-то пошло не так! Попробуйте еще раз.`,
-        })
-        setIsInfoToolTipOpen(true)
+        });
+        setIsInfoToolTipOpen(true);
         setIsSubmitted(false);
       });
   };
@@ -214,40 +214,42 @@ const App = () => {
       setIsSubmitted(true);
 
       auth
-          .register(password, email)
-          .then((res) => {
-            if (res) {
-              setAuthUserData({
-                ...authUserData,
-                message: "Вы успешно зарегистрировались!",
-              });
-              setIsInfoToolTipOpen(true);
-              setIsSignedUp(true);
-              setIsShowPassword(false);
-              history.push("/sign-in");
-            } else {
-              setAuthUserData({
-                ...authUserData,
-                message: "Что-то пошло не так! Попробуйте еще раз.",
-              });
-              setIsInfoToolTipOpen(true);
-              setIsSignedUp(false);
-              setIsShowPassword(false);
-              setIsSubmitted(false);
-            }
-          })
-          .catch((err) => {
-            const errorMessage = String(err);
-            console.log(`Ошибка регистрации пользователя: ${errorMessage.split(':')[1]}`);
-
+        .register(password, email)
+        .then((res) => {
+          if (res) {
             setAuthUserData({
               ...authUserData,
-              message: `${errorMessage.split(':')[1]}!`,
-            })
-            setIsInfoToolTipOpen(true)
+              message: "Вы успешно зарегистрировались!",
+            });
+            setIsInfoToolTipOpen(true);
+            setIsSignedUp(true);
+            setIsShowPassword(false);
+            history.push("/sign-in");
+          } else {
+            setAuthUserData({
+              ...authUserData,
+              message: "Что-то пошло не так! Попробуйте еще раз.",
+            });
+            setIsInfoToolTipOpen(true);
             setIsSignedUp(false);
+            setIsShowPassword(false);
             setIsSubmitted(false);
+          }
+        })
+        .catch((err) => {
+          const errorMessage = String(err);
+          console.log(
+            `Ошибка регистрации пользователя: ${errorMessage.split(":")[1]}`
+          );
+
+          setAuthUserData({
+            ...authUserData,
+            message: `${errorMessage.split(":")[1]}!`,
           });
+          setIsInfoToolTipOpen(true);
+          setIsSignedUp(false);
+          setIsSubmitted(false);
+        });
     } else {
       setAuthUserData({
         ...authUserData,
@@ -268,36 +270,41 @@ const App = () => {
     setIsSubmitted(true);
 
     auth
-        .authorize(password, email)
-        .then((data) => {
-          if (data) {
-            setAuthUserData({
-              ...authUserData,
-              email: "",
-              password: "",
-            });
-            setIsLoggedIn(true);
-            setUserEmail(email);
-            setIsShowPassword(false);
-            history.push("/main");
-            setTimeout(() => setIsSubmitted(false), 3000);
-          } else {
-            setAuthUserData({
-              ...authUserData,
-              message: "Неверный логин или пароль! Попробуйте еще раз.",
-            });
-            setIsLoggedIn(false);
-            setIsSubmitted(false);
-            setIsInfoToolTipOpen(true);
-            setIsShowPassword(false);
-            setUserEmail({});
-          }
-        })
-        .catch((err) => {
-          console.log(`Ошибка авторизации пользователя: ${err.status}`);
-          setIsSubmitted(false);
+      .authorize(password, email)
+      .then((data) => {
+        if (data) {
+          setAuthUserData({
+            ...authUserData,
+            email: "",
+            password: "",
+          });
+          setIsLoggedIn(true);
+          setUserEmail(email);
           setIsShowPassword(false);
+          history.push("/main");
+          setTimeout(() => setIsSubmitted(false), 3000);
+        } else {
+          setAuthUserData({
+            ...authUserData,
+            message: "Неверный логин или пароль! Попробуйте еще раз.",
+          });
+          setIsLoggedIn(false);
+          setIsSubmitted(false);
+          setIsInfoToolTipOpen(true);
+          setIsShowPassword(false);
+          setUserEmail({});
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка авторизации пользователя: ${err.status}`);
+        setAuthUserData({
+          ...authUserData,
+          message: `Ошибка авторизации пользователя. Пожалуйста, обратитесь в службу поддержки!`,
         });
+        setIsInfoToolTipOpen(true);
+        setIsSubmitted(false);
+        setIsShowPassword(false);
+      });
   };
 
   //функция проверки токена для автоматической авторизации пользователя
@@ -311,14 +318,14 @@ const App = () => {
 
     if (token) {
       auth
-          .checkToken(token)
-          .then((res) => {
-            const { data } = res;
-            setUserEmail(data.email);
-            setIsLoggedIn(true);
-            history.push("/main");
-          })
-          .catch((err) => console.log(`Ошибка при проверке токена:${err}`));
+        .checkToken(token)
+        .then((res) => {
+          const { data } = res;
+          setUserEmail(data.email);
+          setIsLoggedIn(true);
+          history.push("/main");
+        })
+        .catch((err) => console.log(`Ошибка при проверке токена:${err}`));
     }
   };
 
@@ -401,12 +408,6 @@ const App = () => {
       closeAllPopups();
     }
   };
-
-
-
-
-
-
 
   //функция выхода пользователя из системы
   const signOut = () => {
