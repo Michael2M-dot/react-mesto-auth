@@ -248,7 +248,7 @@ const App = () => {
           });
           setIsInfoToolTipOpen(true);
           setIsSignedUp(false);
-          setIsSubmitted(false);
+          setTimeout(() => setIsSubmitted(false), 3000);
         });
     } else {
       setAuthUserData({
@@ -272,7 +272,7 @@ const App = () => {
     auth
       .authorize(password, email)
       .then((data) => {
-        if (data) {
+        if (data.token) {
           setAuthUserData({
             ...authUserData,
             email: "",
@@ -283,28 +283,21 @@ const App = () => {
           setIsShowPassword(false);
           history.push("/main");
           setTimeout(() => setIsSubmitted(false), 3000);
-        } else {
-          setAuthUserData({
-            ...authUserData,
-            message: "Неверный логин или пароль! Попробуйте еще раз.",
-          });
-          setIsLoggedIn(false);
-          setIsSubmitted(false);
-          setIsInfoToolTipOpen(true);
-          setIsShowPassword(false);
-          setUserEmail({});
         }
       })
       .catch((err) => {
         console.log(`Ошибка авторизации пользователя: ${err.status}`);
         setAuthUserData({
           ...authUserData,
-          message: `Ошибка авторизации пользователя. Пожалуйста, обратитесь в службу поддержки!`,
+          message: `Ошибка авторизации пользователя: Неверный логин или пароль! Попробуйте еще раз.`,
         });
+        setIsLoggedIn(false);
         setIsInfoToolTipOpen(true);
         setIsSubmitted(false);
         setIsShowPassword(false);
+        setUserEmail({});
       });
+    setTimeout(() => setIsSubmitted(false), 2000);
   };
 
   //функция проверки токена для автоматической авторизации пользователя
@@ -325,7 +318,15 @@ const App = () => {
           setIsLoggedIn(true);
           history.push("/main");
         })
-        .catch((err) => console.log(`Ошибка при проверке токена:${err}`));
+        .catch((err) => {
+          console.log(`Ошибка при проверке токена:${err}`)
+          history.push("/sign-in")
+          setAuthUserData({
+            ...authUserData,
+            message: `Ошибка авторизации пользователя. Пожалуйста, войдите под своей учетной записью`,
+          });
+          setIsInfoToolTipOpen(true);
+        });
     }
   };
 
