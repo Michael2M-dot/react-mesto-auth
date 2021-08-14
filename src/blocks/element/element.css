@@ -9,4 +9,11 @@
 
   border-radius: 10px;
   background: var(--color__background_window);
+
+  transition: box-shadow 0.8s ease;
+}
+
+.element:focus,
+.element:hover {
+  box-shadow: 0 0 30px rgba(192, 191, 191, 0.85);
 }

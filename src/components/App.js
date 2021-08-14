@@ -68,7 +68,7 @@ const App = () => {
         });
         setIsInfoToolTipOpen(true);
       });
-  }, []);
+  }, [setAuthUserData]);
 
   // функционал загрузки данных о пользователе с сервера
   useEffect(() => {
@@ -87,7 +87,7 @@ const App = () => {
         });
         setIsInfoToolTipOpen(true);
       });
-  }, []);
+  }, [setAuthUserData]);
 
   //функционал добавления новой карточки пользователя
   const handleAddCardSubmit = (newCard) => {
