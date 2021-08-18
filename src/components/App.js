@@ -34,17 +34,17 @@ const App = () => {
   //Стэйт переменная регистрации нового пользователя
   const [isSignedUp, setIsSignedUp] = useState(false);
   //Стэйт переменная для временного хранения данных о выбраной карточке
-  const [selectedCard, setSelectedCard] = useState({});
+  const [selectedCard, setSelectedCard] = useState(null);
   //Стэйт переменная для карточки
   const [cards, setCards] = useState([]);
   //Стэйт переменная для хранения данных удаляемой карточки
-  const [deletedCardData, setDeletedCardData] = useState({});
+  const [deletedCardData, setDeletedCardData] = useState(null);
   //Стэйт переменная для хранения данных пользователя
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
   //Стэйт переменная для cохранения данных авторизованного пользователя
-  const [authUserData, setAuthUserData] = useState({});
+  const [authUserData, setAuthUserData] = useState(null);
   //стэйт переменная для хранения почтового адреса пользователя
-  const [userEmail, setUserEmail] = useState({});
+  const [userEmail, setUserEmail] = useState(null);
   //стэйт переменная для хранения состояния значка просмотра пароля
   const [isShowPassword, setIsShowPassword] = useState(false);
   //стэйт переменная для открытия бургена меню на мобильной версии приложения
