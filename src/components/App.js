@@ -124,8 +124,8 @@ const App = () => {
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((items) =>
-          items.map((item) => (item._id === card._id ? newCard : item))
+        setCards((state) =>
+          state.map((item) => (item._id === card._id ? newCard : item))
         );
       })
       .catch((err) => {

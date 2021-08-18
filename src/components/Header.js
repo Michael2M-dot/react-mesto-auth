@@ -1,7 +1,7 @@
 import Logo from "../images/mesto_logo.svg";
 import cx from "classnames";
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Header = ({ mix, buttonText, userEmail, endPoint, signOut }) => {
@@ -21,9 +21,9 @@ const Header = ({ mix, buttonText, userEmail, endPoint, signOut }) => {
 
   return (
     <header className={cx(mix, "header")}>
-      <NavLink to="/main" className="logo">
+      <Link to="/main" className="logo">
         <img src={Logo} alt="Логотип MESTO" className="header__logo" />
-      </NavLink>
+      </Link>
       <div
         className={`header__burger ${isBurgerMenuOpen ? "active" : ""}`}
         onClick={handleMenuBurger}
@@ -39,9 +39,9 @@ const Header = ({ mix, buttonText, userEmail, endPoint, signOut }) => {
           </p>
         )}
         <p className={`header__item ${isBurgerMenuOpen ? "active" : ""}`}>
-          <NavLink className="header__link" to={endPoint} onClick={signOut}>
+          <Link className="header__link" to={endPoint} onClick={signOut}>
             {buttonText}
-          </NavLink>
+          </Link>
         </p>
       </div>
     </header>
