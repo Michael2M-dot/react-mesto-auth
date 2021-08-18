@@ -40,9 +40,9 @@ const App = () => {
   //Стэйт переменная для хранения данных удаляемой карточки
   const [deletedCardData, setDeletedCardData] = useState(null);
   //Стэйт переменная для хранения данных пользователя
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
   //Стэйт переменная для cохранения данных авторизованного пользователя
-  const [authUserData, setAuthUserData] = useState(null);
+  const [authUserData, setAuthUserData] = useState({});
   //стэйт переменная для хранения почтового адреса пользователя
   const [userEmail, setUserEmail] = useState(null);
   //стэйт переменная для хранения состояния значка просмотра пароля
@@ -53,41 +53,45 @@ const App = () => {
 
   //получаем массив исходных карточек
   useEffect(() => {
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => {
-        console.log(
-          `Непредвиденная ошибка при загрузке карточек: ${err.status} ${err.statusText}`
-        );
-        setAuthUserData({
-          ...authUserData,
-          message: `Непредвиденная ошибка! Пожалуйста, обратитесь в службу поддержки.`,
-        });
-        setIsInfoToolTipOpen(true);
-      });
-  }, [setAuthUserData]);
+    if (isLoggedIn){
+      api
+          .getInitialCards()
+          .then((cardData) => {
+            setCards(cardData);
+          })
+          .catch((err) => {
+            console.log(
+                `Непредвиденная ошибка при загрузке карточек: ${err.status} ${err.statusText}`
+            );
+            setAuthUserData({
+              ...authUserData,
+              message: `Непредвиденная ошибка! Пожалуйста, обратитесь в службу поддержки.`,
+            });
+            setIsInfoToolTipOpen(true);
+          });
+    }
+  }, [setAuthUserData, isLoggedIn]);
 
   // функционал загрузки данных о пользователе с сервера
   useEffect(() => {
-    api
-      .getUserData()
-      .then((userData) => {
-        setCurrentUser(userData);
-      })
-      .catch((err) => {
-        console.log(
-          `Непредвиденная ошибка при загрузке данных пользователя: ${err.status} ${err.statusText}`
-        );
-        setAuthUserData({
-          ...authUserData,
-          message: `Непредвиденная ошибка! Пожалуйста, обратитесь в службу поддержки.`,
-        });
-        setIsInfoToolTipOpen(true);
-      });
-  }, [setAuthUserData]);
+    if (isLoggedIn) {
+      api
+          .getUserData()
+          .then((userData) => {
+            setCurrentUser(userData);
+          })
+          .catch((err) => {
+            console.log(
+                `Непредвиденная ошибка при загрузке данных пользователя: ${err.status} ${err.statusText}`
+            );
+            setAuthUserData({
+              ...authUserData,
+              message: `Непредвиденная ошибка! Пожалуйста, обратитесь в службу поддержки.`,
+            });
+            setIsInfoToolTipOpen(true);
+          });
+    }
+  }, [setAuthUserData, isLoggedIn]);
 
   //функционал добавления новой карточки пользователя
   const handleAddCardSubmit = (newCard) => {
