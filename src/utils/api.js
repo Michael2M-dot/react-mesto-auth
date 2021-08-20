@@ -30,6 +30,7 @@ class Api {
   updateUserData(data) {
     return fetch(`${this._serverUrl}/users/me`, {
       method: "PATCH",
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -41,6 +42,7 @@ class Api {
   addCard(card) {
     return fetch(`${this._serverUrl}/cards`, {
       method: "POST",
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: card.name,
@@ -52,6 +54,7 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._serverUrl}/cards/${id}`, {
       method: "DELETE",
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => this._checkStatus(res));
   }
@@ -59,6 +62,7 @@ class Api {
   changeLikeCardStatus(id, cardIsLiked) {
     return fetch(`${this._serverUrl}/cards/likes/${id}`, {
       method: cardIsLiked ? "PUT" : "DELETE",
+      credentials: 'include',
       headers: this._headers,
     }).then((res) => this._checkStatus(res));
   }
@@ -66,6 +70,7 @@ class Api {
   updateAvatar(data) {
     return fetch(`${this._serverUrl}/users/me/avatar`, {
       method: "PATCH",
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar,
@@ -75,7 +80,7 @@ class Api {
 }
 
 const api = new Api({
-  serverUrl: "https://mesto.nomoreparties.co/v1/cohort-24",
+  serverUrl: "http://api.mmm.mesto.nomoredomai.nomoredomains.club",
   headers: {
     authorization: "99295e52-decf-4a30-8030-f17c65fb60b0",
     "Content-Type": "application/json",

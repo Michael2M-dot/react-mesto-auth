@@ -1,13 +1,12 @@
 // export const BASE_URL = "https://auth.nomoreparties.co";
-export const BASE_URL = "https://api.mmm.mesto.nomoredomai.nomoredomains.club";
+export const BASE_URL = "http://api.mmm.mesto.nomoredomai.nomoredomains.club";
 
 //регистрация пользователя на сервере
 export const register = (password, email) => {
-  console.log(password);
-  console.log(email);
   return (
     fetch(`${BASE_URL}/signup`, {
       method: "POST",
+      credentials: 'include',
       headers: {
         Accept: "application/json",
         "Content-type": "application/json",
@@ -39,6 +38,7 @@ export const register = (password, email) => {
 export const authorize = (password, identifier) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
+    credentials: 'include',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -61,6 +61,7 @@ export const authorize = (password, identifier) => {
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
+    credentials: 'include',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
