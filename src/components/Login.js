@@ -32,7 +32,7 @@ const Login = ({ handleLogin, isSubmitted }) => {
       <Header
         mix={"page__header section"}
         buttonText={"Регистрация"}
-        endPoint={"/sign-up"}
+        endPoint={"/signup"}
       />
 
       <InitialPageWithForm

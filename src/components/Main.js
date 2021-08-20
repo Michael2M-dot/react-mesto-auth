@@ -23,7 +23,7 @@ const Main = ({
         mix={"page__header section"}
         userEmail={userEmail}
         buttonText={"Выйти"}
-        endPoint={"/sign-in"}
+        endPoint={"/signin"}
         signOut={signOut}
       />
       <main className="content page__content section section_size_narrow">

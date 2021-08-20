@@ -32,7 +32,7 @@ const Register = ({ handleRegister, isSubmitted }) => {
       <Header
         mix={"page__header section"}
         buttonText={"Войти"}
-        endPoint={"/sign-in"}
+        endPoint={"/signin"}
       />
       <InitialPageWithForm
         name={"user-sign-up"}
