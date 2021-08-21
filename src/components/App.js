@@ -66,9 +66,9 @@ const App = () => {
           ...authUserData,
           message: `Непредвиденная ошибка! Пожалуйста, обратитесь в службу поддержки.`,
         });
-        setIsInfoToolTipOpen(true);
+        // setIsInfoToolTipOpen(true);
       });
-  }, [setAuthUserData]);
+  }, []);
 
   // функционал загрузки данных о пользователе с сервера
   useEffect(() => {
@@ -85,9 +85,9 @@ const App = () => {
           ...authUserData,
           message: `Непредвиденная ошибка! Пожалуйста, обратитесь в службу поддержки.`,
         });
-        setIsInfoToolTipOpen(true);
+        // setIsInfoToolTipOpen(true);
       });
-  }, [setAuthUserData]);
+  }, []);
 
   //функционал добавления новой карточки пользователя
   const handleAddCardSubmit = (newCard) => {

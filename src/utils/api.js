@@ -1,7 +1,7 @@
 // Токен: 99295e52-decf-4a30-8030-f17c65fb60b0
 // Идентификатор группы: cohort-24
 /* "homepage": "https://github.com/Michael2M-dot/react-mesto-auth" */
-//  "homepage": "home/darak-admin/frontend-mesto",
+//  "homepage": "home/darak-admin/frontend-mesto"
 
 class Api {
   constructor({ serverUrl, headers }) {
@@ -82,7 +82,7 @@ class Api {
 const api = new Api({
   serverUrl: "http://api.mmm.mesto.nomoredomai.nomoredomains.club",
   headers: {
-    // authorization: `Bearer ${token}`,
+    // authorization: `Bearer ${'99295e52-decf-4a30-8030-f17c65fb60b0'}`,
     "Content-Type": "application/json",
   },
 });
