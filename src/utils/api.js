@@ -82,7 +82,7 @@ class Api {
 const api = new Api({
   serverUrl: "http://api.mmm.mesto.nomoredomai.nomoredomains.club",
   headers: {
-    authorization: "99295e52-decf-4a30-8030-f17c65fb60b0",
+    // authorization: `Bearer ${token}`,
     "Content-Type": "application/json",
   },
 });
