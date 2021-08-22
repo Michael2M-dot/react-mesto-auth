@@ -37,7 +37,7 @@ export const register = (password, email) => {
 export const authorize = (password, identifier) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
-    // credentials: 'include',
+    credentials: 'include',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -48,6 +48,10 @@ export const authorize = (password, identifier) => {
     }),
   })
     .then((res) => checkStatus(res))
+    .then((res) => {
+      const { jwt } = res.headers;
+      console.log(jwt)
+    })
     .then((data) => {
       if (data.token) {
         localStorage.setItem("jwt", data.token);
@@ -60,14 +64,16 @@ export const authorize = (password, identifier) => {
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
-    // credentials: 'include',
+    credentials: 'include',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      // 'Set-Cookie': `${token}`,
     },
   })
     .then((res) => {
+      const { jwt } = res.headers.cookies;
+      console.log(jwt)
       if (res.ok) {
         return res.json();
       } else {
