@@ -1,5 +1,5 @@
 // export const BASE_URL = "https://auth.nomoreparties.co";
-export const BASE_URL = "http://api.mmm.mesto.nomoredomai.nomoredomains.club";
+// export const BASE_URL = "http://api.mmm.mesto.nomoredomai.nomoredomains.club";
 
 //регистрация пользователя на сервере
 export const register = (password, email) => {

@@ -80,9 +80,9 @@ class Api {
 }
 
 const api = new Api({
-  serverUrl: "http://api.mmm.mesto.nomoredomai.nomoredomains.club",
+  serverUrl: "https://auth.nomoreparties.co",
   headers: {
-    // authorization: `Bearer ${'99295e52-decf-4a30-8030-f17c65fb60b0'}`,
+    authorization: `Bearer ${'99295e52-decf-4a30-8030-f17c65fb60b0'}`,
     "Content-Type": "application/json",
   },
 });
