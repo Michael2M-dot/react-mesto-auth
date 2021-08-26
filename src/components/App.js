@@ -115,13 +115,13 @@ const App = () => {
 
   //функция управления лайками на карточке
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((user) => user._id === currentUser._id);
+    const isLiked = card.likes.some(owner => owner._id === currentUser._id);
 
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((items) =>
-          items.map((item) => (item._id === card._id ? newCard : item))
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
         );
       })
       .catch((err) => {
