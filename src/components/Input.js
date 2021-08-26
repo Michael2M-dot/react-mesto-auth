@@ -35,7 +35,7 @@ const Input = (props) => {
       )}
 
       <span className="form__input-error" id={`${props.id}-input-error`}>
-          {props.error}
+          {props.errors}
       </span>
     </label>
   );

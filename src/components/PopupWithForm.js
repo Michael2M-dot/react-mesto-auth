@@ -8,12 +8,13 @@ function PopupWithForm({
   onSubmit,
   children,
   button,
-  idSubmitted,
+  isSubmitted = false,
+  isDisabled = false,
 }) {
   return (
     <section
       className={`popup page__popup section ${
-        isOpen ? "page__popup_visible" : ""
+        isOpen && "page__popup_visible"
       }`}
       id={`edit-${name}`}
       onClick={onClose}
@@ -31,7 +32,7 @@ function PopupWithForm({
           className="form"
           id={`${name}`}
           name={`${name}`}
-          autoComplete="off"
+          noValidate
           onSubmit={onSubmit}
         >
           {children}
@@ -39,15 +40,15 @@ function PopupWithForm({
             arial-lable="Подтвердите действие пользователя"
             type="submit"
             className={`button form__submit-btn ${
-              idSubmitted ? "form__submit-btn_disabled" : ""
+              isDisabled && "form__submit-btn_disabled"
             }`}
-            disabled={idSubmitted}
+            disabled={isDisabled}
           >
             <div className="button__wrapper">
               <div className="button__text">{button}</div>
               <div
                 className={`button__jumping-dots ${
-                  idSubmitted ? "" : "button__jumping-dots_visibility_hidden"
+                  !isSubmitted && "button__jumping-dots_visibility_hidden"
                 }`}
               >
                 <span className="button__jumping-dots jump">.</span>

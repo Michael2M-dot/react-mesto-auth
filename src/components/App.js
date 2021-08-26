@@ -95,9 +95,12 @@ const App = () => {
 
     api
       .addCard(newCard)
-      .then((newCard) => {
-        setCards([newCard, ...cards]);
-        setIsAddPlacePopupOpen(false);
+      .then((newCardData) => {
+        setCards((state) => [
+          newCardData,
+          ...state
+        ]);
+        closeAllPopups();
         setTimeout(() => setIsSubmitted(false), 1000);
       })
       .catch((err) => {
@@ -110,7 +113,8 @@ const App = () => {
         });
         setIsInfoToolTipOpen(true);
         setTimeout(() => setIsSubmitted(false), 1000);
-      });
+      })
+        .finally(() => setIsSubmitted(false));
   };
 
   //функция управления лайками на карточке
